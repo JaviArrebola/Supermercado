@@ -37,6 +37,7 @@ public class VentanaStock extends JFrame {
 	public VentanaStock(ResultSet rs, int longitud) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
+		setTitle("App Supermercado");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

@@ -18,9 +18,9 @@ public class Main {
 	private static VentanaPago ventanaPago;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub 
 		ventanaInicio = new VentanaInicio();
 		ventanaInicio.setVisible(true);
+		
 	}
 	
 	public static void inicioSesion() {
