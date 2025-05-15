@@ -1,5 +1,9 @@
 package controlador;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import modelo.Consultas;
 import vista.VentanaCompra;
 import vista.VentanaInicio;
 import vista.VentanaPago;
@@ -35,8 +39,18 @@ public class Main {
 	}
 	
 	public static void verStock() {
-		ventanaStock = new VentanaStock();
-		ventanaStock.setVisible(true);
+		ResultSet rs;
+		try {
+			rs = Consultas.stock();
+			int i = 1;
+			for (;rs.next();i++);
+			rs = Consultas.stock();
+			ventanaStock = new VentanaStock(rs, i);
+			ventanaStock.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void sesionCompra() {
@@ -74,6 +88,37 @@ public class Main {
 		ventanaRecibo.setVisible(false);
 		ventanaCompra = new VentanaCompra();
 		ventanaCompra.setVisible(true);
+	}
+	
+	public static void buscarNombre(String nombre) {
+		try {
+			ResultSet rs = Consultas.stockNombre(nombre);
+			int i = 1;
+			for (;rs.next();i++);
+			rs = Consultas.stockNombre(nombre);
+			ventanaStock.setVisible(false);
+			ventanaStock = null;
+			ventanaStock = new VentanaStock(rs, i);
+			ventanaStock.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void buscarID(int id) {
+		try {
+			ResultSet rs = Consultas.stockID(id);int i = 1;
+			for (;rs.next();i++);
+			rs = Consultas.stockID(id);
+			ventanaStock.setVisible(false);
+			ventanaStock = null;
+			ventanaStock = new VentanaStock(rs, i);
+			ventanaStock.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

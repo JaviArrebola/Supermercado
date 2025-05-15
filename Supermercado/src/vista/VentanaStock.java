@@ -33,10 +33,8 @@ public class VentanaStock extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JTextField codigo;
 	private JButton btnNewButton_3;
-	private int longitud=0;
-	private ResultSet rs=null;
 	
-	public VentanaStock() {
+	public VentanaStock(ResultSet rs, int longitud) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -128,16 +126,7 @@ public class VentanaStock extends JFrame {
 		gbc_btnNewButton_3.gridy = 1;
 		contentPane.add(btnNewButton_3, gbc_btnNewButton_3);
 		
-		try {
-			rs = Consultas.stock();for (longitud=1; rs.next(); longitud++);
-			
-			rs = Consultas.stock();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
+				
 		
 		tablaStock = new JTable(longitud, 4);
 		GridBagConstraints gbc_tablaStock = new GridBagConstraints();
@@ -186,23 +175,13 @@ public class VentanaStock extends JFrame {
 	}
 	
 	public void buscarNombre() throws SQLException {
-		rs = Consultas.stockNombre(nombre.toString());
-		for (int i = 1; rs.next(); i++) {
-			tablaStock.setValueAt(rs.getInt("id"), i, 0);
-			tablaStock.setValueAt(rs.getString("nombre"), i, 1);
-			tablaStock.setValueAt(rs.getInt("stock"), i, 2);
-			tablaStock.setValueAt(rs.getFloat("precio"), i, 3);
-		}
+		Main.buscarNombre(nombre.getText());
 	}
 	
 	public void buscarID() throws SQLException {
-		rs = Consultas.stockID(Integer.parseInt(codigo.toString()));
-		for (int i = 1; rs.next(); i++) {
-			tablaStock.setValueAt(rs.getInt("id"), i, 0);
-			tablaStock.setValueAt(rs.getString("nombre"), i, 1);
-			tablaStock.setValueAt(rs.getInt("stock"), i, 2);
-			tablaStock.setValueAt(rs.getFloat("precio"), i, 3);
-		}
+		String id = codigo.getText();
+		int i = Integer.parseInt(id);
+		Main.buscarID(i);
 	}
 
 }
