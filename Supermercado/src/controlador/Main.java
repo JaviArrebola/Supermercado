@@ -1,9 +1,10 @@
-package controlador;
+    package controlador;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import modelo.Consultas;
+import modelo.*;
 import vista.VentanaCompra;
 import vista.VentanaInicio;
 import vista.VentanaPago;
@@ -20,6 +21,30 @@ public class Main {
 	public static void main(String[] args) {
 		ventanaInicio = new VentanaInicio();
 		ventanaInicio.setVisible(true);
+	}
+	
+	public static String login(String usuario, String password) {
+		Connection conn = ConectorDB.getConexion();
+		ResultSet rs = null;
+		try(PreparedStatement ps = conn.prepareStatement("SELECT e.password, e.nombre FROM empleados e WHERE nombre = ?")) {
+			ps.setString(1, usuario);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				if(password.equals(rs.getString("e.password"))) {
+					return "Usuario validado";
+				}
+				else {
+					return "Contraseña incorrecta";
+				}
+			}
+			return "Usuario no encontrado";
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Conexión no valida";
+		}
 		
 	}
 	
