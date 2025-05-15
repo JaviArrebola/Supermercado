@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Main;
-import modelo.Consultas;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -35,9 +34,8 @@ public class VentanaStock extends JFrame {
 	private JButton btnNewButton_3;
 	
 	public VentanaStock(ResultSet rs, int longitud) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
-		setTitle("App Supermercado");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -173,6 +171,8 @@ public class VentanaStock extends JFrame {
 		gbc_btnNewButton_1.gridx = 2;
 		gbc_btnNewButton_1.gridy = 3;
 		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		
 	}
 	
 	public void buscarNombre() throws SQLException {
