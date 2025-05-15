@@ -106,6 +106,9 @@ public class VentanaCompra extends JFrame {
 		tableListaCompra = new JTable();
 		tableListaCompra.setModel(new DefaultTableModel(
 			new Object[][] {
+				{"Nombre", "Cantidad", "Precio", "Eliminar"},
+				
+				{null, null, null, null},
 			},
 			new String[] {
 				"Nombre", "Cantidad", "Precio", "Eliminar"

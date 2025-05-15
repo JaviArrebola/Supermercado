@@ -4,17 +4,15 @@ public class Producto {
 	private int id;
     private String nombre;
     private double precio;
-    private int stock;
-    private String codigoBarras;
+    private int unidades;
 
     public Producto() {}
 
-    public Producto(int id, String nombre, double precio, int stock, String codigoBarras) {
+    public Producto(int id, String nombre, double precio, int unidades) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
-        this.stock = stock;
-        this.codigoBarras = codigoBarras;
+        this.unidades = unidades;
     }
 
 	public String getNombre() {
@@ -33,20 +31,12 @@ public class Producto {
 		this.precio = precio;
 	}
 
-	public int getStock() {
-		return stock;
+	public int getUnidades() {
+		return unidades;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
-	public String getCodigoBarras() {
-		return codigoBarras;
-	}
-
-	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
+	public void setUnidades(int stock) {
+		this.unidades = unidades;
 	}
 
 	public int getId() {
@@ -55,8 +45,8 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock
-				+ ", codigoBarras=" + codigoBarras + "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", unidades=" + unidades
+				+ "]";
 	}
     
 }
