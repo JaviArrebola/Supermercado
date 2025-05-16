@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class VentanaCompra extends JFrame {
 
@@ -38,9 +39,9 @@ public class VentanaCompra extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JPanel panelIntroducionManual = new JPanel();
@@ -104,10 +105,19 @@ public class VentanaCompra extends JFrame {
 		gbc_btnCodigoProducto.gridy = 0;
 		panelIntroducionManual.add(btnCodigoProducto, gbc_btnCodigoProducto);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 2;
+		contentPane.add(scrollPane, gbc_scrollPane);
+		
 		tableListaCompra = new JTable();
+		scrollPane.setViewportView(tableListaCompra);
 		tableListaCompra.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Nombre", "Cantidad", "Precio", "Eliminar"},
+				{"", "", "", },
 				
 				{null, null, null, null},
 			},
@@ -115,19 +125,13 @@ public class VentanaCompra extends JFrame {
 				"Nombre", "Cantidad", "Precio", "Eliminar"
 			}
 		));
-		GridBagConstraints gbc_tableListaCompra = new GridBagConstraints();
-		gbc_tableListaCompra.insets = new Insets(0, 0, 5, 5);
-		gbc_tableListaCompra.fill = GridBagConstraints.BOTH;
-		gbc_tableListaCompra.gridx = 1;
-		gbc_tableListaCompra.gridy = 2;
-		contentPane.add(tableListaCompra, gbc_tableListaCompra);
 		
 		JPanel panelOpciones = new JPanel();
 		GridBagConstraints gbc_panelOpciones = new GridBagConstraints();
 		gbc_panelOpciones.anchor = GridBagConstraints.NORTH;
 		gbc_panelOpciones.insets = new Insets(0, 0, 5, 5);
 		gbc_panelOpciones.gridx = 1;
-		gbc_panelOpciones.gridy = 3;
+		gbc_panelOpciones.gridy = 4;
 		contentPane.add(panelOpciones, gbc_panelOpciones);
 		GridBagLayout gbl_panelOpciones = new GridBagLayout();
 		gbl_panelOpciones.columnWidths = new int[]{0, 0, 0, 0};
