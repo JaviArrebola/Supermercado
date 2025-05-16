@@ -17,7 +17,7 @@ public class Main {
 	private static VentanaStock ventanaStock;
 	private static VentanaRecibo ventanaRecibo;
 	private static VentanaPago ventanaPago;
-	private Compra compra;
+	private static Compra compra = new Compra();
 
 	public static void main(String[] args) {
 		ventanaInicio = new VentanaInicio();
@@ -145,6 +145,21 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void anadirProductoACompra(int id) {
+		ResultSet rs = Consultas.compraID(id);
+		Producto nuevo;
+		try {
+			if(rs.next()) {
+				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precioUnitario"));
+				compra.anadirCompra(nuevo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 

@@ -3,16 +3,16 @@ package modelo;
 public class Producto {
 	private int id;
     private String nombre;
-    private double precio;
+    private double precioUnitario;
     private int unidades;
 
     public Producto() {}
 
-    public Producto(int id, String nombre, double precio, int unidades) {
+    public Producto(int id, String nombre, double precioUnitario) {
         this.id = id;
         this.nombre = nombre;
-        this.precio = precio;
-        this.unidades = unidades;
+        this.precioUnitario = precioUnitario;
+        this.unidades = 1;
     }
 
 	public String getNombre() {
@@ -23,12 +23,12 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public double getPrecio() {
-		return precio;
+	public double getPrecioUnitario() {
+		return precioUnitario;
 	}
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
 	}
 
 	public int getUnidades() {
@@ -45,7 +45,7 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", unidades=" + unidades
+		return "Producto [id=" + id + ", nombre=" + nombre + ", precio unitario=" + precioUnitario + ", unidades=" + unidades
 				+ "]";
 	}
     

@@ -98,13 +98,6 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(fieldCodigoProducto, gbc_fieldCodigoProducto);
 		fieldCodigoProducto.setColumns(10);
 		
-		JButton btnCodigoProducto = new JButton("Añadir");
-		GridBagConstraints gbc_btnCodigoProducto = new GridBagConstraints();
-		gbc_btnCodigoProducto.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCodigoProducto.gridx = 6;
-		gbc_btnCodigoProducto.gridy = 0;
-		panelIntroducionManual.add(btnCodigoProducto, gbc_btnCodigoProducto);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
@@ -117,14 +110,26 @@ public class VentanaCompra extends JFrame {
 		scrollPane.setViewportView(tableListaCompra);
 		tableListaCompra.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"", "", "", },
-				
-				{null, null, null, null},
 			},
 			new String[] {
-				"Nombre", "Cantidad", "Precio", "Eliminar"
+				"Nombre", "Cantidad", "Precio unitario", "Eliminar"
 			}
 		));
+		
+		JButton btnCodigoProducto = new JButton("Añadir");
+		btnCodigoProducto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
+				// tableListaCompra.addRow(new Object[][] {"Hola", "Hola2", "HOLAAAAAAAA", "No"});
+			}
+		});
+		
+		GridBagConstraints gbc_btnCodigoProducto = new GridBagConstraints();
+		gbc_btnCodigoProducto.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCodigoProducto.gridx = 6;
+		gbc_btnCodigoProducto.gridy = 0;
+		panelIntroducionManual.add(btnCodigoProducto, gbc_btnCodigoProducto);
 		
 		JPanel panelOpciones = new JPanel();
 		GridBagConstraints gbc_panelOpciones = new GridBagConstraints();

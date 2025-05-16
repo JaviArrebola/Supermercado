@@ -34,7 +34,7 @@ public class Consultas {
 		ResultSet rs = null;
 		try {
 			st = con.createStatement();
-			rs = st.executeQuery("SELECT nombre, precio FROM productos WHERE id = " + id + ";");
+			rs = st.executeQuery("SELECT id, nombre, precio FROM productos WHERE id = " + id + ";");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
