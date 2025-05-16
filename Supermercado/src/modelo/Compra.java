@@ -7,12 +7,20 @@ public class Compra {
 	
 	// Le he dejado con constructor por defecto ya que no se que tiene un Arraylist por defecto
 	
+	public Compra() {
+		this.compra = new ArrayList<>();
+	}
+	
 	public ArrayList<Producto> getCompra() {
 		return compra;
 	}
 
 	public void setCompra(ArrayList<Producto> compra) {
 		this.compra = compra;
+	}
+	
+	public void anadirCompra(Producto producto) {
+		this.compra.add(producto);
 	}
 	
 }

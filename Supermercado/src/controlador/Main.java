@@ -17,6 +17,7 @@ public class Main {
 	private static VentanaStock ventanaStock;
 	private static VentanaRecibo ventanaRecibo;
 	private static VentanaPago ventanaPago;
+	private Compra compra;
 
 	public static void main(String[] args) {
 		ventanaInicio = new VentanaInicio();
