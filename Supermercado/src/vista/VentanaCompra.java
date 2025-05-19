@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Main;
+import modelo.Producto;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -28,8 +29,16 @@ public class VentanaCompra extends JFrame {
 	private JTextField fieldNombreProducto;
 	private JTextField fieldCodigoProducto;
 	private JTable tableListaCompra;
+	private DefaultTableModel modeloCompra;
 
 	public VentanaCompra() {
+
+		modeloCompra = new DefaultTableModel();
+		modeloCompra.addColumn("Nombre");
+		modeloCompra.addColumn("Cantidad");
+		modeloCompra.addColumn("Precio unitario");
+		modeloCompra.addColumn("Eliminar");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 300);
 		setTitle("App Supermercado");
@@ -39,8 +48,8 @@ public class VentanaCompra extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, -255, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -101,27 +110,30 @@ public class VentanaCompra extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 2;
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
+		
 		tableListaCompra = new JTable();
 		scrollPane.setViewportView(tableListaCompra);
-		tableListaCompra.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nombre", "Cantidad", "Precio unitario", "Eliminar"
-			}
-		));
+		tableListaCompra.setModel(modeloCompra);
 		
 		JButton btnCodigoProducto = new JButton("Añadir");
 		btnCodigoProducto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
-				// tableListaCompra.addRow(new Object[][] {"Hola", "Hola2", "HOLAAAAAAAA", "No"});
+				Producto anadir = Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
+				
+				if(anadir != null) {
+					String productos[] = new String [4];
+					productos[0] = anadir.getNombre();
+					productos[1] = anadir.getUnidades() + "";
+					productos[2] = anadir.getPrecioUnitario() + "";
+					productos[3] = "PRUEBA_CUATRO";
+					modeloCompra.addRow(productos);
+				}
 			}
 		});
 		

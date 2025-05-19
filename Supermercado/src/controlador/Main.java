@@ -1,4 +1,4 @@
-    package controlador;
+package controlador;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -147,12 +147,12 @@ public class Main {
 		}
 	}
 	
-	public static void anadirProductoACompra(int id) {
+	public static Producto anadirProductoACompra(int id) {
 		ResultSet rs = Consultas.compraID(id);
-		Producto nuevo;
+		Producto nuevo = null;
 		try {
 			if(rs.next()) {
-				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precioUnitario"));
+				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
 				compra.anadirCompra(nuevo);
 			}
 		} catch (SQLException e) {
@@ -160,7 +160,8 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		return nuevo;
+		
 	}
 	
-
 }
