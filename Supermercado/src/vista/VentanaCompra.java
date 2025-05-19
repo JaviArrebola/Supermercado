@@ -37,10 +37,9 @@ public class VentanaCompra extends JFrame {
 		modeloCompra.addColumn("Nombre");
 		modeloCompra.addColumn("Cantidad");
 		modeloCompra.addColumn("Precio unitario");
-		modeloCompra.addColumn("Eliminar");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 300);
+		setBounds(100, 100, 900, 600);
 		setTitle("App Supermercado");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,9 +59,9 @@ public class VentanaCompra extends JFrame {
 		gbc_panelIntroducionManual.gridy = 1;
 		contentPane.add(panelIntroducionManual, gbc_panelIntroducionManual);
 		GridBagLayout gbl_panelIntroducionManual = new GridBagLayout();
-		gbl_panelIntroducionManual.columnWidths = new int[]{0, 124, 0, 0, 0, 121};
+		gbl_panelIntroducionManual.columnWidths = new int[]{0, 124, 0, 0, 0, 121, 0, 0, 0};
 		gbl_panelIntroducionManual.rowHeights = new int[]{0, 0, 0};
-		gbl_panelIntroducionManual.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_panelIntroducionManual.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		gbl_panelIntroducionManual.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panelIntroducionManual.setLayout(gbl_panelIntroducionManual);
 		
@@ -127,21 +126,35 @@ public class VentanaCompra extends JFrame {
 				Producto anadir = Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
 				
 				if(anadir != null) {
-					String productos[] = new String [4];
+					String productos[] = new String [3];
 					productos[0] = anadir.getNombre();
 					productos[1] = anadir.getUnidades() + "";
 					productos[2] = anadir.getPrecioUnitario() + "";
-					productos[3] = "PRUEBA_CUATRO";
 					modeloCompra.addRow(productos);
 				}
 			}
 		});
 		
 		GridBagConstraints gbc_btnCodigoProducto = new GridBagConstraints();
-		gbc_btnCodigoProducto.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCodigoProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCodigoProducto.gridx = 6;
 		gbc_btnCodigoProducto.gridy = 0;
 		panelIntroducionManual.add(btnCodigoProducto, gbc_btnCodigoProducto);
+		
+		JButton btnEliminarSeleccion = new JButton("Eliminar producto seleccionado");
+		btnEliminarSeleccion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int fila = tableListaCompra.getSelectedRow();
+				Main.eliminarProductoDeCompra(fila);
+				modeloCompra.removeRow(fila);
+			}
+		});
+		GridBagConstraints gbc_btnEliminarSeleccion = new GridBagConstraints();
+		gbc_btnEliminarSeleccion.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEliminarSeleccion.gridx = 8;
+		gbc_btnEliminarSeleccion.gridy = 0;
+		panelIntroducionManual.add(btnEliminarSeleccion, gbc_btnEliminarSeleccion);
 		
 		JPanel panelOpciones = new JPanel();
 		GridBagConstraints gbc_panelOpciones = new GridBagConstraints();

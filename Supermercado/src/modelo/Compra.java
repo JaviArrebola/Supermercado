@@ -23,4 +23,13 @@ public class Compra {
 		this.compra.add(producto);
 	}
 	
+	public void eliminarProductoCompra(int posicion) {
+		this.compra.remove(posicion);
+	}
+
+	@Override
+	public String toString() {
+		return compra.toString();
+	}
+	
 }

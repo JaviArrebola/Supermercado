@@ -172,4 +172,9 @@ public class Main {
 		
 	}
 	
+	public static void eliminarProductoDeCompra(int fila) {
+		compra.eliminarProductoCompra(fila);
+		System.out.println(compra.toString());
+	}
+	
 }
