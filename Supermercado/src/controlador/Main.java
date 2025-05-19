@@ -1,5 +1,6 @@
 package controlador;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,13 +27,20 @@ public class Main {
 	
 	public static String login(String usuario, String password) {
 		Connection conn = ConectorDB.getConexion();
+		String encoded="";
+		try {
+			encoded = SHA256.generateSHA(password);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ResultSet rs = null;
 		try(PreparedStatement ps = conn.prepareStatement("SELECT e.password, e.nombre FROM empleados e WHERE nombre = ?")) {
 			ps.setString(1, usuario);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				if(password.equals(rs.getString("e.password"))) {
+				if(encoded.equals(rs.getString("e.password"))) {
 					return "Usuario validado";
 				}
 				else {
