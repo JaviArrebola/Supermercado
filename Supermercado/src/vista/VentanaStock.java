@@ -16,10 +16,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaStock extends JFrame {
 
@@ -32,8 +35,17 @@ public class VentanaStock extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JTextField codigo;
 	private JButton btnNewButton_3;
+	private JScrollPane scrollPane;
+	private DefaultTableModel tableStock;
 	
 	public VentanaStock(ResultSet rs, int longitud) {
+		
+		tableStock = new DefaultTableModel();
+		tableStock.addColumn("ID");
+		tableStock.addColumn("Nombre");
+		tableStock.addColumn("Cantidad");
+		tableStock.addColumn("Precio Unitario");
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
 		contentPane = new JPanel();
@@ -125,33 +137,37 @@ public class VentanaStock extends JFrame {
 		gbc_btnNewButton_3.gridy = 1;
 		contentPane.add(btnNewButton_3, gbc_btnNewButton_3);
 		
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 4;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 2;
+		contentPane.add(scrollPane, gbc_scrollPane);
+		
 				
 		
 		tablaStock = new JTable(longitud, 4);
-		GridBagConstraints gbc_tablaStock = new GridBagConstraints();
-		gbc_tablaStock.gridwidth = 4;
-		gbc_tablaStock.insets = new Insets(0, 0, 5, 5);
-		gbc_tablaStock.fill = GridBagConstraints.BOTH;
-		gbc_tablaStock.gridx = 1;
-		gbc_tablaStock.gridy = 2;
-		contentPane.add(tablaStock, gbc_tablaStock);
+		tablaStock.setModel(tableStock);
+		
+		scrollPane.setViewportView(tablaStock);
+		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 3;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
-		tablaStock.setValueAt("ID", 0, 0);
-		tablaStock.setValueAt("Nombre", 0, 1);
-		tablaStock.setValueAt("Cantidad", 0, 2);
-		tablaStock.setValueAt("Precio unidad", 0, 3);
-		
 		try {
-			for (int i = 1; rs.next(); i++) {
-				tablaStock.setValueAt(rs.getInt("id"), i, 0);
-				tablaStock.setValueAt(rs.getString("nombre"), i, 1);
-				tablaStock.setValueAt(rs.getInt("stock"), i, 2);
-				tablaStock.setValueAt(rs.getFloat("precio"), i, 3);
+			while (rs.next()) {
+				String productos[] = new String[4];
+				productos[0]=rs.getString("id");
+				productos[1]=rs.getString("nombre");
+				productos[2]=rs.getString("stock");
+				productos[3]=rs.getString("precio");
+				tableStock.addRow(productos);
+				System.out.println(Arrays.toString(productos));
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

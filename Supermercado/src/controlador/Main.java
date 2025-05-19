@@ -73,10 +73,13 @@ public class Main {
 	}
 	
 	public static void verStock() {
+		if (ventanaStock!=null) {
+			ventanaStock.setVisible(false);
+		}
 		ResultSet rs;
 		try {
 			rs = Consultas.stock();
-			int i = 1;
+			int i = 0;
 			for (;rs.next();i++);
 			rs = Consultas.stock();
 			ventanaStock = new VentanaStock(rs, i);
@@ -127,7 +130,7 @@ public class Main {
 	public static void buscarNombre(String nombre) {
 		try {
 			ResultSet rs = Consultas.stockNombre(nombre);
-			int i = 1;
+			int i = 0;
 			for (;rs.next();i++);
 			rs = Consultas.stockNombre(nombre);
 			ventanaStock.setVisible(false);
@@ -142,7 +145,8 @@ public class Main {
 	
 	public static void buscarID(int id) {
 		try {
-			ResultSet rs = Consultas.stockID(id);int i = 1;
+			ResultSet rs = Consultas.stockID(id);
+			int i = 0;
 			for (;rs.next();i++);
 			rs = Consultas.stockID(id);
 			ventanaStock.setVisible(false);
