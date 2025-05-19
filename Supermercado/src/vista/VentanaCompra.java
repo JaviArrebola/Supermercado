@@ -87,8 +87,19 @@ public class VentanaCompra extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Producto anadir = Main.anadirProductoACompra(fieldNombreProducto.getText());
+				boolean repetido = false;
+				int filas = tableListaCompra.getRowCount();
 				
-				if(anadir != null) {
+				for(int i = 0; i < filas; i++) {
+					if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
+						tableListaCompra.setValueAt(anadir.getUnidades(), i, 0);
+						repetido = true;
+						break;
+					}
+					
+				}
+				
+				if(anadir != null && repetido != true) {
 					String productos[] = new String [3];
 					productos[0] = anadir.getNombre();
 					productos[1] = anadir.getUnidades() + "";
