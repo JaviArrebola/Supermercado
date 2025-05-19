@@ -168,6 +168,25 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		System.out.println(compra.toString());
+		
+		return nuevo;
+		
+	}
+	
+	public static Producto anadirProductoACompra(String nombre) {
+		ResultSet rs = Consultas.compraNombre(nombre);
+		Producto nuevo = null;
+		try {
+			if(rs.next()) {
+				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
+				compra.anadirCompra(nuevo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return nuevo;
 		
 	}

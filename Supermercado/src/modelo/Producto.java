@@ -35,14 +35,26 @@ public class Producto {
 		return unidades;
 	}
 
-	public void setUnidades(int stock) {
+	public void setUnidades(int unidades) {
 		this.unidades = unidades;
 	}
 
 	public int getId() {
 		return id;
 	}
-
+	
+	public void incrementarUnidades() {
+		this.unidades += unidades;
+	}
+	
+	public boolean equals(Producto otro) {
+		boolean resultado = false;
+		if(this.id == otro.id) {
+			resultado = true;
+		}
+		return resultado;
+	}
+	
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio unitario=" + precioUnitario + ", unidades=" + unidades

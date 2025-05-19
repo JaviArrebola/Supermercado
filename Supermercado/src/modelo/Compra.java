@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Compra {
 	private ArrayList <Producto> compra;
@@ -20,7 +21,24 @@ public class Compra {
 	}
 	
 	public void anadirCompra(Producto producto) {
-		this.compra.add(producto);
+		Iterator <Producto> it = compra.iterator();
+		Producto comparar = null;
+		int posicion = 0;
+		boolean repetido = false;
+		while(it.hasNext()) {
+			comparar = it.next();
+			if(producto.equals(comparar)) {
+				repetido = true;
+				break;
+			}
+			posicion++;
+		}
+		if(repetido == true) {
+			comparar.incrementarUnidades();
+			compra.set(posicion, comparar);
+		}else {
+			this.compra.add(producto);
+		}
 	}
 	
 	public void eliminarProductoCompra(int posicion) {

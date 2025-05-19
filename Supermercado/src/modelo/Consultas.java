@@ -41,4 +41,19 @@ public class Consultas {
 		}
 		return rs;
 	}
+	
+	public static ResultSet compraNombre(String nombre) { // Esto ayuda a la busqueda de un producto para la VentanaCompra
+		Connection con = ConectorDB.getConexion();
+		Statement st;
+		ResultSet rs = null;
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT id, nombre, precio FROM productos WHERE nombre = '" + nombre + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 }

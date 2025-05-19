@@ -83,6 +83,21 @@ public class VentanaCompra extends JFrame {
 		fieldNombreProducto.setColumns(10);
 		
 		JButton btnNombreProducto = new JButton("Añadir");
+		btnNombreProducto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Producto anadir = Main.anadirProductoACompra(fieldNombreProducto.getText());
+				
+				if(anadir != null) {
+					String productos[] = new String [3];
+					productos[0] = anadir.getNombre();
+					productos[1] = anadir.getUnidades() + "";
+					productos[2] = anadir.getPrecioUnitario() + "";
+					modeloCompra.addRow(productos);
+				}
+				
+			}
+		});
 		GridBagConstraints gbc_btnNombreProducto = new GridBagConstraints();
 		gbc_btnNombreProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNombreProducto.gridx = 2;
