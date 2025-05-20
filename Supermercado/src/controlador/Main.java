@@ -95,6 +95,10 @@ public class Main {
 		ventanaPago.setVisible(true);
 	}
 	
+	public static void resetearCompra() {
+		compra = new Compra();
+	}
+	
 	public static void verStock() {
 		if (ventanaStock!=null) {
 			ventanaStock.setVisible(false);

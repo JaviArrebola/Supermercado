@@ -29,6 +29,7 @@ public class VentanaPago extends JFrame {
 	private float vueltas;
 
 	public VentanaPago(float precioFinal) {
+		Main.resetearCompra();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("App Supermercado");
@@ -47,7 +48,9 @@ public class VentanaPago extends JFrame {
 		btnTicket.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (vueltas > 0) {
 				Main.ticket();
+				}
 			}
 		});
 		
