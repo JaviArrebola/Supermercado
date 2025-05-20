@@ -37,7 +37,7 @@ public class VentanaCompra extends JFrame {
 		modeloCompra.addColumn("Nombre");
 		modeloCompra.addColumn("Cantidad");
 		modeloCompra.addColumn("Precio unitario");
-		
+						
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		setTitle("App Supermercado");
@@ -86,18 +86,17 @@ public class VentanaCompra extends JFrame {
 		btnNombreProducto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int filas = tableListaCompra.getRowCount();
 				Producto anadir = Main.anadirProductoACompra(fieldNombreProducto.getText());
 				boolean repetido = false;
-				int filas = tableListaCompra.getRowCount();
 				
 				for(int i = 0; i < filas; i++) {
-					System.out.println("Valor: " + tableListaCompra.getValueAt(i, 0));
 					if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
-						tableListaCompra.setValueAt(anadir.getUnidades(), i, 0);
+						int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
+						tableListaCompra.setValueAt(unidades, i, 1);
 						repetido = true;
 						break;
 					}
-					
 				}
 				
 				if(anadir != null && repetido != true) {
@@ -110,6 +109,7 @@ public class VentanaCompra extends JFrame {
 				
 			}
 		});
+		
 		GridBagConstraints gbc_btnNombreProducto = new GridBagConstraints();
 		gbc_btnNombreProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNombreProducto.gridx = 2;
@@ -143,14 +143,29 @@ public class VentanaCompra extends JFrame {
 		
 		
 		tableListaCompra = new JTable();
+		tableListaCompra.setEnabled(false);
 		scrollPane.setViewportView(tableListaCompra);
 		tableListaCompra.setModel(modeloCompra);
 		
 		JButton btnCodigoProducto = new JButton("Añadir");
-		btnCodigoProducto.addMouseListener(new MouseAdapter() {
+		btnCodigoProducto.addMouseListener(new MouseAdapter() { // Por acabar
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				int filas = tableListaCompra.getRowCount();
 				Producto anadir = Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
+				boolean repetido = false;
+				
+				for(int i = 0; i < filas; i++) {
+					
+					
+					
+					if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) { // No se que puedo ponerle a la condicion para que me compare los id
+						int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
+						tableListaCompra.setValueAt(unidades, i, 1);
+						repetido = true;
+						break;
+					}
+				}
 				
 				if(anadir != null) {
 					String productos[] = new String [3];
