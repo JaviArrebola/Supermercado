@@ -32,6 +32,7 @@ public class VentanaCompra extends JFrame {
 	private DefaultTableModel modeloCompra;
 
 	public VentanaCompra() {
+		Main.resetearCompra();
 
 		modeloCompra = new DefaultTableModel();
 		modeloCompra.addColumn("Nombre");
