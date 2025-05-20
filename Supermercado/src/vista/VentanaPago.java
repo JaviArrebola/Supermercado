@@ -16,14 +16,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class VentanaPago extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField fieldEntrega;
+	private float vueltas;
 
-	public VentanaPago() {
+	public VentanaPago(float precioFinal) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("App Supermercado");
@@ -54,13 +59,15 @@ public class VentanaPago extends JFrame {
 		gbc_lblTotal.gridy = 1;
 		contentPane.add(lblTotal, gbc_lblTotal);
 		
-		JLabel lblTotalCompra = new JLabel("");
-		GridBagConstraints gbc_lblTotalCompra = new GridBagConstraints();
-		gbc_lblTotalCompra.anchor = GridBagConstraints.WEST;
-		gbc_lblTotalCompra.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTotalCompra.gridx = 2;
-		gbc_lblTotalCompra.gridy = 1;
-		contentPane.add(lblTotalCompra, gbc_lblTotalCompra);
+		JLabel precio = new JLabel();
+		GridBagConstraints gbc_precio = new GridBagConstraints();
+		gbc_precio.anchor = GridBagConstraints.WEST;
+		gbc_precio.insets = new Insets(0, 0, 5, 5);
+		gbc_precio.gridx = 2;
+		gbc_precio.gridy = 1;
+		contentPane.add(precio, gbc_precio);
+		
+		precio.setText(precioFinal+"");
 		
 		JLabel lblEntrega = new JLabel("Entrega: ");
 		GridBagConstraints gbc_lblEntrega = new GridBagConstraints();
@@ -70,14 +77,15 @@ public class VentanaPago extends JFrame {
 		gbc_lblEntrega.gridy = 2;
 		contentPane.add(lblEntrega, gbc_lblEntrega);
 		
-		fieldEntrega = new JTextField();
-		GridBagConstraints gbc_fieldEntrega = new GridBagConstraints();
-		gbc_fieldEntrega.anchor = GridBagConstraints.WEST;
-		gbc_fieldEntrega.insets = new Insets(0, 0, 5, 5);
-		gbc_fieldEntrega.gridx = 2;
-		gbc_fieldEntrega.gridy = 2;
-		contentPane.add(fieldEntrega, gbc_fieldEntrega);
-		fieldEntrega.setColumns(10);
+		JSpinner entrega = new JSpinner();
+		
+		
+		GridBagConstraints gbc_entrega = new GridBagConstraints();
+		gbc_entrega.fill = GridBagConstraints.HORIZONTAL;
+		gbc_entrega.insets = new Insets(0, 0, 5, 5);
+		gbc_entrega.gridx = 2;
+		gbc_entrega.gridy = 2;
+		contentPane.add(entrega, gbc_entrega);
 		
 		JLabel lblCambio = new JLabel("Cambio");
 		GridBagConstraints gbc_lblCambio = new GridBagConstraints();
@@ -87,19 +95,26 @@ public class VentanaPago extends JFrame {
 		gbc_lblCambio.gridy = 3;
 		contentPane.add(lblCambio, gbc_lblCambio);
 		
-		JLabel lblCambioCompra = new JLabel("");
-		GridBagConstraints gbc_lblCambioCompra = new GridBagConstraints();
-		gbc_lblCambioCompra.anchor = GridBagConstraints.WEST;
-		gbc_lblCambioCompra.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCambioCompra.gridx = 2;
-		gbc_lblCambioCompra.gridy = 3;
-		contentPane.add(lblCambioCompra, gbc_lblCambioCompra);
+		JLabel cambio = new JLabel("");
+		GridBagConstraints gbc_cambio = new GridBagConstraints();
+		gbc_cambio.anchor = GridBagConstraints.WEST;
+		gbc_cambio.insets = new Insets(0, 0, 5, 5);
+		gbc_cambio.gridx = 2;
+		gbc_cambio.gridy = 3;
+		contentPane.add(cambio, gbc_cambio);
 		GridBagConstraints gbc_btnTicket = new GridBagConstraints();
 		gbc_btnTicket.anchor = GridBagConstraints.EAST;
 		gbc_btnTicket.insets = new Insets(0, 0, 5, 5);
 		gbc_btnTicket.gridx = 1;
 		gbc_btnTicket.gridy = 4;
 		contentPane.add(btnTicket, gbc_btnTicket);
+		
+		entrega.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				vueltas = (int)entrega.getValue() - (float) precioFinal;
+				cambio.setText(vueltas+"");
+			}
+		});
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 		btnCerrarSesion.addMouseListener(new MouseAdapter() {

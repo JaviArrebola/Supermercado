@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Iterator;
+
 import modelo.*;
 import vista.VentanaCompra;
 import vista.VentanaInicio;
@@ -19,6 +22,7 @@ public class Main {
 	private static VentanaRecibo ventanaRecibo;
 	private static VentanaPago ventanaPago;
 	private static Compra compra = new Compra();
+	private static float subtotal;
 
 	public static void main(String[] args) {
 		ventanaInicio = new VentanaInicio();
@@ -68,7 +72,26 @@ public class Main {
 		if (ventanaStock!=null) {
 		ventanaStock.setVisible(false);
 		}
-		ventanaPago = new VentanaPago();
+		
+		Iterator<Producto> it = compra.getCompra().iterator();
+		
+		Producto a = it.next();
+		
+		float precio = (float)a.getPrecioUnitario();
+		int unidades = a.getUnidades();
+		subtotal = precio*unidades;
+		
+		while (it.hasNext()) {
+			a = it.next();
+			
+			precio = (float)a.getPrecioUnitario();
+			unidades = a.getUnidades();
+			subtotal += precio*unidades;
+		}
+		
+		float precioTotal = subtotal + (subtotal*21/100);
+		
+		ventanaPago = new VentanaPago(precioTotal);
 		ventanaPago.setVisible(true);
 	}
 	
