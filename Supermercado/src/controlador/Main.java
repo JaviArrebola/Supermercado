@@ -90,6 +90,7 @@ public class Main {
 		}
 		
 		float precioTotal = subtotal + (subtotal*21/100);
+		precioTotal = (float)Math.round(precioTotal*100)/100;
 		
 		ventanaPago = new VentanaPago(precioTotal);
 		ventanaPago.setVisible(true);

@@ -83,7 +83,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(fieldNombreProducto, gbc_fieldNombreProducto);
 		fieldNombreProducto.setColumns(10);
 		
-		JButton btnNombreProducto = new JButton("Añadir");
+		JButton btnNombreProducto = new JButton("Añadir"); // ESTO ES EL BOTON NOMBRE PRODUCTO
 		btnNombreProducto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -149,7 +149,7 @@ public class VentanaCompra extends JFrame {
 		tableListaCompra.setModel(modeloCompra);
 		
 		JButton btnCodigoProducto = new JButton("Añadir");
-		btnCodigoProducto.addMouseListener(new MouseAdapter() { // Por acabar
+		btnCodigoProducto.addMouseListener(new MouseAdapter() { // Por acabar, es el [BOTON ID PRODUCTO]
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int filas = tableListaCompra.getRowCount();
@@ -157,10 +157,7 @@ public class VentanaCompra extends JFrame {
 				boolean repetido = false;
 				
 				for(int i = 0; i < filas; i++) {
-					
-					
-					
-					if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) { // No se que puedo ponerle a la condicion para que me compare los id
+					if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
 						int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
 						tableListaCompra.setValueAt(unidades, i, 1);
 						repetido = true;
@@ -168,7 +165,7 @@ public class VentanaCompra extends JFrame {
 					}
 				}
 				
-				if(anadir != null) {
+				if(anadir != null && repetido != true) {
 					String productos[] = new String [3];
 					productos[0] = anadir.getNombre();
 					productos[1] = anadir.getUnidades() + "";
