@@ -91,6 +91,7 @@ public class VentanaCompra extends JFrame {
 				int filas = tableListaCompra.getRowCount();
 				
 				for(int i = 0; i < filas; i++) {
+					System.out.println("Valor: " + tableListaCompra.getValueAt(i, 0));
 					if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
 						tableListaCompra.setValueAt(anadir.getUnidades(), i, 0);
 						repetido = true;

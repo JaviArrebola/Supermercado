@@ -44,7 +44,7 @@ public class Producto {
 	}
 	
 	public void incrementarUnidades() {
-		this.unidades += unidades;
+		this.unidades += 1;
 	}
 	
 	public boolean equals(Producto otro) {
