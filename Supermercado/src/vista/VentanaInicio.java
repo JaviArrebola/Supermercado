@@ -54,7 +54,7 @@ public class VentanaInicio extends JFrame {
 		gbc_lblEstadoSesion.gridy = 3;
 		contentPane.add(lblEstadoSesion, gbc_lblEstadoSesion);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nombre:");
+		JLabel lblNewLabel_1 = new JLabel("Username:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);

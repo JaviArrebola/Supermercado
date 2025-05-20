@@ -35,10 +35,10 @@ public class Main {
 			e.printStackTrace();
 		}
 		ResultSet rs = null;
-		try(PreparedStatement ps = conn.prepareStatement("SELECT e.password, e.nombre FROM empleados e WHERE nombre = ?")) {
+		try(PreparedStatement ps = conn.prepareStatement("SELECT e.password, e.username FROM empleados e WHERE username = ?")) {
 			ps.setString(1, usuario);
 			rs = ps.executeQuery();
-			
+						
 			if(rs.next()) {
 				if(encoded.equals(rs.getString("e.password"))) {
 					return "Usuario validado";
