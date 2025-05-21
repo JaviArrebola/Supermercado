@@ -149,7 +149,7 @@ public class Main {
 		Consultas.restarStock(compra);
 		Consultas.crearVenta(precioTotal);
 		Consultas.crearDetalleVenta(compra);
-		ventanaRecibo = new VentanaRecibo();
+		ventanaRecibo = new VentanaRecibo(compra);
 		ventanaRecibo.setVisible(true);
 	}
 	

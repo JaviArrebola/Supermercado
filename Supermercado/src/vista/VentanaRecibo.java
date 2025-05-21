@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Main;
+import modelo.Compra;
+import modelo.Producto;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -14,6 +16,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
@@ -25,20 +29,42 @@ public class VentanaRecibo extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable tableCompra;
+	private DefaultTableModel modeloCompra;
 
-	public VentanaRecibo() {
+
+	public VentanaRecibo(Compra compra) {
+		
+		Iterator <Producto> it = compra.getCompra().iterator();
+
+		modeloCompra = new DefaultTableModel();
+		modeloCompra.addColumn("Ud"); // Unidades
+		modeloCompra.addColumn("Articulo");
+		modeloCompra.addColumn("Precio"); // Precio unitario 
+		modeloCompra.addColumn("Importe"); // Precio unitario * Ud
+		
+		while(it.hasNext()) {
+			Producto anadir = it.next();
+			String productos[] = new String [4];
+			productos[0] = anadir.getUnidades() + "";
+			productos[1] = anadir.getNombre();
+			productos[2] = anadir.getPrecioUnitario() + "";
+			float importe = Float.parseFloat(productos[0]) * Float.parseFloat(productos[2]);
+			productos[3] = importe + "";
+			modeloCompra.addRow(productos);
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 700);
 		setTitle("App Supermercado");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[]{30, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{22, 0, 0, 0, 0, 24, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Supermercado");
@@ -113,14 +139,8 @@ public class VentanaRecibo extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		tableCompra = new JTable();
-		tableCompra.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-			},
-			new String[] {
-				"Ud", "Articulo", "Precio", "Importe"
-			}
-		));
+		tableCompra.setEnabled(false);
+		tableCompra.setModel(modeloCompra);
 		scrollPane.setViewportView(tableCompra);
 		
 		JPanel panelOpciones = new JPanel();
