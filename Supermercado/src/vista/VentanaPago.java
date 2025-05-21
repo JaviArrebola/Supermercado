@@ -114,6 +114,7 @@ public class VentanaPago extends JFrame {
 		entrega.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				vueltas = (int)entrega.getValue() - (float) precioFinal;
+				vueltas = (float)Math.round(vueltas*100)/100;
 				cambio.setText(vueltas+"");
 			}
 		});

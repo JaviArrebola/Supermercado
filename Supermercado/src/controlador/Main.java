@@ -149,7 +149,15 @@ public class Main {
 		Consultas.restarStock(compra);
 		Consultas.crearVenta(precioTotal);
 		Consultas.crearDetalleVenta(compra);
-		ventanaRecibo = new VentanaRecibo(compra);
+		ResultSet rs = Consultas.getVenta();
+		String id="";
+		try {
+			id = rs.getInt("id_venta")+"";
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ventanaRecibo = new VentanaRecibo(compra, id);
 		ventanaRecibo.setVisible(true);
 	}
 	

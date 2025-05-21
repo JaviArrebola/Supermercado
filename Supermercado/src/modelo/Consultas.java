@@ -109,4 +109,18 @@ public class Consultas {
 		}
 	}
 	
+	public static ResultSet getVenta() {
+		Connection con = ConectorDB.getConexion();
+		ResultSet rs = null;
+		try {
+			Statement st = con.createStatement();
+			rs = st.executeQuery("SELECT max(id_venta) AS id_venta FROM ventas;");
+			rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 }

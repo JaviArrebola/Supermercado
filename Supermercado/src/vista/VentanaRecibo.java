@@ -16,6 +16,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.util.Iterator;
 
 import javax.swing.JLabel;
@@ -32,7 +33,7 @@ public class VentanaRecibo extends JFrame {
 	private DefaultTableModel modeloCompra;
 
 
-	public VentanaRecibo(Compra compra) {
+	public VentanaRecibo(Compra compra, String id) {
 		
 		Iterator <Producto> it = compra.getCompra().iterator();
 
@@ -95,7 +96,7 @@ public class VentanaRecibo extends JFrame {
 		gbc_lblCodigoTicket.gridy = 0;
 		panel_1.add(lblCodigoTicket, gbc_lblCodigoTicket);
 		
-		JLabel cod = new JLabel("");
+		JLabel cod = new JLabel(id);
 		GridBagConstraints gbc_cod = new GridBagConstraints();
 		gbc_cod.insets = new Insets(0, 0, 0, 5);
 		gbc_cod.gridx = 1;
@@ -116,7 +117,7 @@ public class VentanaRecibo extends JFrame {
 		gbc_lblFecha.gridy = 0;
 		panel_1.add(lblFecha, gbc_lblFecha);
 		
-		JLabel fecha = new JLabel("");
+		JLabel fecha = new JLabel(LocalDate.now()+"");
 		GridBagConstraints gbc_fecha = new GridBagConstraints();
 		gbc_fecha.insets = new Insets(0, 0, 0, 5);
 		gbc_fecha.gridx = 4;
