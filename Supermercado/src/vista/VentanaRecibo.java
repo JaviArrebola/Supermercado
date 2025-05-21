@@ -41,17 +41,24 @@ public class VentanaRecibo extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
+		JLabel lblNewLabel = new JLabel("Supermercado");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 1;
+		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 1;
-		gbc_panel_1.gridy = 1;
+		gbc_panel_1.gridy = 2;
 		contentPane.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
@@ -62,32 +69,39 @@ public class VentanaRecibo extends JFrame {
 		gbc_lblCodigoTicket.gridy = 0;
 		panel_1.add(lblCodigoTicket, gbc_lblCodigoTicket);
 		
+		JLabel cod = new JLabel("");
+		GridBagConstraints gbc_cod = new GridBagConstraints();
+		gbc_cod.insets = new Insets(0, 0, 0, 5);
+		gbc_cod.gridx = 1;
+		gbc_cod.gridy = 0;
+		panel_1.add(cod, gbc_cod);
+		
 		JLabel lblCodigoTicketCompra = new JLabel("");
 		GridBagConstraints gbc_lblCodigoTicketCompra = new GridBagConstraints();
 		gbc_lblCodigoTicketCompra.insets = new Insets(0, 0, 0, 5);
-		gbc_lblCodigoTicketCompra.gridx = 1;
+		gbc_lblCodigoTicketCompra.gridx = 2;
 		gbc_lblCodigoTicketCompra.gridy = 0;
 		panel_1.add(lblCodigoTicketCompra, gbc_lblCodigoTicketCompra);
 		
 		JLabel lblFecha = new JLabel("Fecha: ");
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 		gbc_lblFecha.insets = new Insets(0, 0, 0, 5);
-		gbc_lblFecha.gridx = 2;
+		gbc_lblFecha.gridx = 3;
 		gbc_lblFecha.gridy = 0;
 		panel_1.add(lblFecha, gbc_lblFecha);
 		
+		JLabel fecha = new JLabel("");
+		GridBagConstraints gbc_fecha = new GridBagConstraints();
+		gbc_fecha.insets = new Insets(0, 0, 0, 5);
+		gbc_fecha.gridx = 4;
+		gbc_fecha.gridy = 0;
+		panel_1.add(fecha, gbc_fecha);
+		
 		JLabel lblFechaCompra = new JLabel("");
 		GridBagConstraints gbc_lblFechaCompra = new GridBagConstraints();
-		gbc_lblFechaCompra.gridx = 3;
+		gbc_lblFechaCompra.gridx = 5;
 		gbc_lblFechaCompra.gridy = 0;
 		panel_1.add(lblFechaCompra, gbc_lblFechaCompra);
-		
-		JLabel lblNewLabel = new JLabel("Supermercado");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 2;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setToolTipText("");

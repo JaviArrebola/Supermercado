@@ -23,6 +23,7 @@ public class Main {
 	private static VentanaPago ventanaPago;
 	private static Compra compra = new Compra();
 	private static float subtotal;
+	private static float precioTotal;
 
 	public static void main(String[] args) {
 		ventanaInicio = new VentanaInicio();
@@ -89,7 +90,7 @@ public class Main {
 			subtotal += precio*unidades;
 		}
 		
-		float precioTotal = subtotal + (subtotal*21/100);
+		precioTotal = subtotal + (subtotal*21/100);
 		precioTotal = (float)Math.round(precioTotal*100)/100;
 		
 		ventanaPago = new VentanaPago(precioTotal);
@@ -145,6 +146,9 @@ public class Main {
 	
 	public static void ticket() {
 		ventanaPago.setVisible(false);
+		Consultas.restarStock(compra);
+		Consultas.crearVenta(precioTotal);
+		Consultas.crearDetalleVenta(compra);
 		ventanaRecibo = new VentanaRecibo();
 		ventanaRecibo.setVisible(true);
 	}
