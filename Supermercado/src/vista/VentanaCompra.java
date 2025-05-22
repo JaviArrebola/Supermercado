@@ -88,7 +88,7 @@ public class VentanaCompra extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Producto anadir = Main.anadirProductoACompra(fieldNombreProducto.getText());
-				anadirProductoACompra(anadir);
+				anadirProductoACompra(anadir); // De ventanaCompra
 			}
 		});
 		
@@ -133,7 +133,7 @@ public class VentanaCompra extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Producto anadir = Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
-				anadirProductoACompra(anadir);
+				anadirProductoACompra(anadir); // De ventanaCompra
 			}
 		});
 		
@@ -175,7 +175,7 @@ public class VentanaCompra extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Producto anadir = Main.anadirProductoACompraCodigoBarra(fieldCodigoBarras.getText());
-				anadirProductoACompra(anadir);
+				anadirProductoACompra(anadir); // De ventanaCompra
 			}
 		});
 		GridBagConstraints gbc_btnCodigoBarras = new GridBagConstraints();

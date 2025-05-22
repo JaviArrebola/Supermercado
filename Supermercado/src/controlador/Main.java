@@ -199,6 +199,22 @@ public class Main {
 		}
 	}
 	
+	public static void buscarCodigoBarra(String codigoBarra) {
+		try {
+			ResultSet rs = Consultas.stockCodigoBarra(codigoBarra);
+			int i = 0;
+			for (;rs.next();i++);
+			rs = Consultas.stockCodigoBarra(codigoBarra);
+			ventanaStock.setVisible(false);
+			ventanaStock = null;
+			ventanaStock = new VentanaStock(rs, i);
+			ventanaStock.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static Producto anadirProductoACompra(int id) {
 		ResultSet rs = Consultas.compraID(id);
 		Producto nuevo = null;

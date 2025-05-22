@@ -37,6 +37,9 @@ public class VentanaStock extends JFrame {
 	private JButton btnNewButton_3;
 	private JScrollPane scrollPane;
 	private DefaultTableModel tableStock;
+	private JLabel lblNewLabel_2;
+	private JTextField codigoBarra;
+	private JButton btnNewButton_4;
 	
 	public VentanaStock(ResultSet rs, int longitud) {
 		
@@ -47,15 +50,15 @@ public class VentanaStock extends JFrame {
 		tableStock.addColumn("Precio Unitario");
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 300);
+		setBounds(100, 100, 800, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 150, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWidths = new int[]{0, 0, 121, 0, 0, 0, 0, 0, 0, 31, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -69,7 +72,7 @@ public class VentanaStock extends JFrame {
 		
 		lblNewLabel = new JLabel("Nombre del producto:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 1;
@@ -77,8 +80,8 @@ public class VentanaStock extends JFrame {
 		
 		nombre = new JTextField();
 		GridBagConstraints gbc_nombre = new GridBagConstraints();
-		gbc_nombre.insets = new Insets(0, 0, 5, 5);
 		gbc_nombre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nombre.insets = new Insets(0, 0, 5, 5);
 		gbc_nombre.gridx = 2;
 		gbc_nombre.gridy = 1;
 		contentPane.add(nombre, gbc_nombre);
@@ -132,10 +135,40 @@ public class VentanaStock extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_3.gridx = 6;
 		gbc_btnNewButton_3.gridy = 1;
 		contentPane.add(btnNewButton_3, gbc_btnNewButton_3);
+		
+		lblNewLabel_2 = new JLabel("Codigo barra: ");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 7;
+		gbc_lblNewLabel_2.gridy = 1;
+		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		codigoBarra = new JTextField();
+		GridBagConstraints gbc_codigoBarra = new GridBagConstraints();
+		gbc_codigoBarra.insets = new Insets(0, 0, 5, 5);
+		gbc_codigoBarra.fill = GridBagConstraints.HORIZONTAL;
+		gbc_codigoBarra.gridx = 8;
+		gbc_codigoBarra.gridy = 1;
+		contentPane.add(codigoBarra, gbc_codigoBarra);
+		codigoBarra.setColumns(10);
+		
+		btnNewButton_4 = new JButton("Buscar");
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Main.buscarCodigoBarra(codigoBarra.getText());
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
+		gbc_btnNewButton_4.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_4.gridx = 9;
+		gbc_btnNewButton_4.gridy = 1;
+		contentPane.add(btnNewButton_4, gbc_btnNewButton_4);
 		
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -154,6 +187,7 @@ public class VentanaStock extends JFrame {
 		scrollPane.setViewportView(tablaStock);
 		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 3;
@@ -182,6 +216,7 @@ public class VentanaStock extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton_1.gridwidth = 2;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton_1.gridx = 2;

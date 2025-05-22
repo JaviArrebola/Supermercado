@@ -23,6 +23,13 @@ public class Consultas {
 		return rs;
 	}
 	
+	public static ResultSet stockCodigoBarra(String codigoBarra) throws SQLException {
+		Connection con = ConectorDB.getConexion();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT id, precio, nombre, stock FROM productos WHERE codigo_barras = '"+codigoBarra+"'");
+		return rs;
+	}
+	
 	public static ResultSet stockID(int id) throws SQLException {
 		Connection con = ConectorDB.getConexion();
 		Statement st = con.createStatement();
