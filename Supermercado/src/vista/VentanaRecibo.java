@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controlador.Main;
 import modelo.Compra;
+import modelo.GeneradorPdf;
 import modelo.Producto;
 
 import java.awt.GridBagLayout;
@@ -207,6 +208,14 @@ public class VentanaRecibo extends JFrame {
 		gbc_btnCerrarSesion.gridx = 1;
 		gbc_btnCerrarSesion.gridy = 0;
 		panelOpciones.add(btnCerrarSesion, gbc_btnCerrarSesion);
+		
+		JButton btnGuardarPdf = new JButton("Guardar Recibo (PDF)");
+		GridBagConstraints gbc_btnGuardarPdf = new GridBagConstraints();
+		gbc_btnGuardarPdf.insets = new Insets(0, 0, 0, 5);
+		gbc_btnGuardarPdf.gridx = 2;
+		gbc_btnGuardarPdf.gridy = 0;
+		panelOpciones.add(btnGuardarPdf, gbc_btnGuardarPdf);
+
 		btnCerrarSesion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -218,6 +227,27 @@ public class VentanaRecibo extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Main.volverRecibo();
 			}
+		});
+		
+		btnGuardarPdf.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        String rutaArchivo = "recibo_" + id + ".pdf";
+
+		        boolean ok = GeneradorPdf.crearReciboPDF(
+		            rutaArchivo,
+		            compra.getCompra(),
+		            id,
+		            subtotal,
+		            precioTotal
+		        );
+
+		        if (ok) {
+		            javax.swing.JOptionPane.showMessageDialog(null, "PDF generado correctamente:\n" + rutaArchivo);
+		        } else {
+		            javax.swing.JOptionPane.showMessageDialog(null, "Error al generar el PDF.");
+		        }
+		    }
 		});
 	}
 

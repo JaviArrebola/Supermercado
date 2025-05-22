@@ -14,6 +14,7 @@ import vista.VentanaInicio;
 import vista.VentanaPago;
 import vista.VentanaRecibo;
 import vista.VentanaStock;
+import modelo.GeneradorPdf;
 
 public class Main {
 	private static VentanaInicio ventanaInicio;
@@ -165,6 +166,33 @@ public class Main {
 		ventanaRecibo.setVisible(false);
 		ventanaCompra = new VentanaCompra();
 		ventanaCompra.setVisible(true);
+	}
+	
+	public static void ticketpdf() {
+	    ventanaPago.setVisible(false);
+	    Consultas.restarStock(compra);
+	    Consultas.crearVenta(precioTotal);
+	    Consultas.crearDetalleVenta(compra);
+	    ResultSet rs = Consultas.getVenta();
+	    String id = "";
+
+	    try {
+	        id = rs.getInt("id_venta") + "";
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    boolean generado = GeneradorPdf.crearReciboPDF("recibo_venta_" + id + ".pdf",
+	            compra.getCompra(), id, subtotal, precioTotal);
+
+	    if (generado) {
+	        System.out.println("PDF generado correctamente.");
+	    } else {
+	        System.err.println("Error al generar el PDF.");
+	    }
+
+	    ventanaRecibo = new VentanaRecibo(compra, id, subtotal, precioTotal);
+	    ventanaRecibo.setVisible(true);
 	}
 	
 	public static void buscarNombre(String nombre) {
