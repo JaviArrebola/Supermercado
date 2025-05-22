@@ -33,7 +33,7 @@ public class VentanaRecibo extends JFrame {
 	private DefaultTableModel modeloCompra;
 
 
-	public VentanaRecibo(Compra compra, String id) {
+	public VentanaRecibo(Compra compra, String id, float subtotal, float precioTotal) {
 		Main.resetearCompra();
 		
 		Iterator <Producto> it = compra.getCompra().iterator();
@@ -55,6 +55,8 @@ public class VentanaRecibo extends JFrame {
 			modeloCompra.addRow(productos);
 		}
 		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 700);
 		setTitle("App Supermercado");
@@ -66,7 +68,7 @@ public class VentanaRecibo extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{30, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{22, 0, 0, 0, 0, 24, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Supermercado");
@@ -145,12 +147,46 @@ public class VentanaRecibo extends JFrame {
 		tableCompra.setModel(modeloCompra);
 		scrollPane.setViewportView(tableCompra);
 		
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 4;
+		contentPane.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0};
+		gbl_panel.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
+		JLabel lblNewLabel_1 = new JLabel("IVA: 21%");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 0;
+		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Subtotal: " + subtotal);
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_2.gridx = 1;
+		gbc_lblNewLabel_2.gridy = 0;
+		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Total: " + precioTotal);
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.gridx = 2;
+		gbc_lblNewLabel_3.gridy = 0;
+		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		
 		JPanel panelOpciones = new JPanel();
 		GridBagConstraints gbc_panelOpciones = new GridBagConstraints();
-		gbc_panelOpciones.insets = new Insets(0, 0, 5, 5);
+		gbc_panelOpciones.insets = new Insets(0, 0, 0, 5);
 		gbc_panelOpciones.fill = GridBagConstraints.VERTICAL;
 		gbc_panelOpciones.gridx = 1;
-		gbc_panelOpciones.gridy = 4;
+		gbc_panelOpciones.gridy = 5;
 		contentPane.add(panelOpciones, gbc_panelOpciones);
 		GridBagLayout gbl_panelOpciones = new GridBagLayout();
 		gbl_panelOpciones.columnWidths = new int[]{0, 0, 0};

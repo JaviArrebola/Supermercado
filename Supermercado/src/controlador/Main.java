@@ -157,7 +157,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ventanaRecibo = new VentanaRecibo(compra, id);
+		ventanaRecibo = new VentanaRecibo(compra, id, subtotal, precioTotal);
 		ventanaRecibo.setVisible(true);
 	}
 	
@@ -273,6 +273,11 @@ public class Main {
 	public static void eliminarProductoDeCompra(int fila) {
 		compra.eliminarProductoCompra(fila);
 		System.out.println(compra.toString());
+	}
+	
+	public static void volverPago() {
+		ventanaPago.setVisible(false);
+		ventanaCompra.setVisible(true);
 	}
 	
 }

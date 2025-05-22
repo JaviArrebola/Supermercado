@@ -37,9 +37,9 @@ public class VentanaPago extends JFrame {
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -63,7 +63,8 @@ public class VentanaPago extends JFrame {
 		
 		JLabel precio = new JLabel();
 		GridBagConstraints gbc_precio = new GridBagConstraints();
-		gbc_precio.anchor = GridBagConstraints.WEST;
+		gbc_precio.gridwidth = 2;
+		gbc_precio.anchor = GridBagConstraints.EAST;
 		gbc_precio.insets = new Insets(0, 0, 5, 5);
 		gbc_precio.gridx = 2;
 		gbc_precio.gridy = 1;
@@ -83,6 +84,7 @@ public class VentanaPago extends JFrame {
 		
 		
 		GridBagConstraints gbc_entrega = new GridBagConstraints();
+		gbc_entrega.gridwidth = 2;
 		gbc_entrega.fill = GridBagConstraints.HORIZONTAL;
 		gbc_entrega.insets = new Insets(0, 0, 5, 5);
 		gbc_entrega.gridx = 2;
@@ -99,7 +101,8 @@ public class VentanaPago extends JFrame {
 		
 		JLabel cambio = new JLabel("");
 		GridBagConstraints gbc_cambio = new GridBagConstraints();
-		gbc_cambio.anchor = GridBagConstraints.WEST;
+		gbc_cambio.gridwidth = 2;
+		gbc_cambio.anchor = GridBagConstraints.EAST;
 		gbc_cambio.insets = new Insets(0, 0, 5, 5);
 		gbc_cambio.gridx = 2;
 		gbc_cambio.gridy = 3;
@@ -126,10 +129,23 @@ public class VentanaPago extends JFrame {
 				Main.sesionPago();
 			}
 		});
+		
+		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Main.volverPago();
+			}
+		});
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 4;
+		contentPane.add(btnNewButton, gbc_btnNewButton);
 		GridBagConstraints gbc_btnCerrarSesion = new GridBagConstraints();
 		gbc_btnCerrarSesion.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCerrarSesion.anchor = GridBagConstraints.WEST;
-		gbc_btnCerrarSesion.gridx = 2;
+		gbc_btnCerrarSesion.gridx = 3;
 		gbc_btnCerrarSesion.gridy = 4;
 		contentPane.add(btnCerrarSesion, gbc_btnCerrarSesion);
 	}
