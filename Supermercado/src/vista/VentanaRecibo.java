@@ -34,6 +34,7 @@ public class VentanaRecibo extends JFrame {
 
 
 	public VentanaRecibo(Compra compra, String id) {
+		Main.resetearCompra();
 		
 		Iterator <Producto> it = compra.getCompra().iterator();
 

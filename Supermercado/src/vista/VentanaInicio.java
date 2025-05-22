@@ -26,6 +26,8 @@ public class VentanaInicio extends JFrame {
 	private JTextField textField_1;
 
 	public VentanaInicio() {
+		Main.resetearCompra();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("App Supermercado");
