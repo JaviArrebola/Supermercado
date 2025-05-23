@@ -70,32 +70,41 @@ public class Main {
 	}
 	
 	public static void finalizarCompra() {
-		ventanaCompra.setVisible(false);
-		if (ventanaStock!=null) {
-		ventanaStock.setVisible(false);
-		}
-		
-		Iterator<Producto> it = compra.getCompra().iterator();
-		
-		Producto a = it.next();
-		
-		float precio = (float)a.getPrecioUnitario();
-		int unidades = a.getUnidades();
-		subtotal = precio*unidades;
-		
-		while (it.hasNext()) {
-			a = it.next();
+
+		if(compra.noHayCompra()) {
 			
-			precio = (float)a.getPrecioUnitario();
-			unidades = a.getUnidades();
-			subtotal += precio*unidades;
+			ventanaCompra.setVisible(false);
+			if (ventanaStock!=null) {
+			ventanaStock.setVisible(false);
+			}
+			
+			Iterator<Producto> it = compra.getCompra().iterator();
+			
+			Producto a = it.next();
+			
+			float precio = (float)a.getPrecioUnitario();
+			int unidades = a.getUnidades();
+			subtotal = precio*unidades;
+			
+			while (it.hasNext()) {
+				a = it.next();
+				
+				precio = (float)a.getPrecioUnitario();
+				unidades = a.getUnidades();
+				subtotal += precio*unidades;
+			}
+			
+			precioTotal = subtotal + (subtotal*21/100);
+			precioTotal = (float)Math.round(precioTotal*100)/100;
+			
+			ventanaPago = new VentanaPago(precioTotal);
+			ventanaPago.setVisible(true);
+			
+		}else {
+			System.out.println("No se puede finalizar una compra sin añadir productos.");
+			System.out.println("Porfavor, introduzca productos a la compra.");
 		}
 		
-		precioTotal = subtotal + (subtotal*21/100);
-		precioTotal = (float)Math.round(precioTotal*100)/100;
-		
-		ventanaPago = new VentanaPago(precioTotal);
-		ventanaPago.setVisible(true);
 	}
 	
 	public static void resetearCompra() {
@@ -293,6 +302,8 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println(compra.toString());
 		
 		return nuevo;
 		

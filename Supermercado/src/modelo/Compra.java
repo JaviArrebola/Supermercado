@@ -50,4 +50,12 @@ public class Compra {
 		return compra.toString();
 	}
 	
+	public boolean noHayCompra() {
+		boolean noVacio = true; // No esta vacio
+		if(compra.isEmpty()) {
+			noVacio = false; // Esta vacio
+		}
+		return noVacio;
+	}
+	
 }

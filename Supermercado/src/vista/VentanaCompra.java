@@ -21,13 +21,17 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaCompra extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField fieldNombreProducto;
-	private JTextField fieldCodigoProducto;
+	private JSpinner fieldCodigoProducto;
 	private JTable tableListaCompra;
 	private DefaultTableModel modeloCompra;
 	private JTextField fieldCodigoBarras;
@@ -106,14 +110,13 @@ public class VentanaCompra extends JFrame {
 		gbc_lblCodigoProducto.gridy = 0;
 		panelIntroducionManual.add(lblCodigoProducto, gbc_lblCodigoProducto);
 		
-		fieldCodigoProducto = new JTextField();
+		fieldCodigoProducto = new JSpinner();
 		GridBagConstraints gbc_fieldCodigoProducto = new GridBagConstraints();
 		gbc_fieldCodigoProducto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_fieldCodigoProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_fieldCodigoProducto.gridx = 5;
 		gbc_fieldCodigoProducto.gridy = 0;
 		panelIntroducionManual.add(fieldCodigoProducto, gbc_fieldCodigoProducto);
-		fieldCodigoProducto.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -132,7 +135,7 @@ public class VentanaCompra extends JFrame {
 		btnCodigoProducto.addMouseListener(new MouseAdapter() { // Es el [BOTON ID PRODUCTO]
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Producto anadir = Main.anadirProductoACompra(Integer.parseInt(fieldCodigoProducto.getText()));
+				Producto anadir = Main.anadirProductoACompra((int)fieldCodigoProducto.getValue());
 				anadirProductoACompra(anadir); // De ventanaCompra
 			}
 		});
@@ -148,8 +151,13 @@ public class VentanaCompra extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int fila = tableListaCompra.getSelectedRow();
-				Main.eliminarProductoDeCompra(fila);
-				modeloCompra.removeRow(fila);
+				if(fila < 0) {
+					System.out.println("No hay ningun producto seleccionado. Seleccione un producto para eliminar.");
+				}else {
+					Main.eliminarProductoDeCompra(fila);
+					modeloCompra.removeRow(fila);
+				}
+
 			}
 		});
 		
@@ -162,6 +170,13 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(lblCodigoBarras, gbc_lblCodigoBarras);
 		
 		fieldCodigoBarras = new JTextField();
+		fieldCodigoBarras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Producto anadir = Main.anadirProductoACompraCodigoBarra(fieldCodigoBarras.getText());
+				anadirProductoACompra(anadir); // De ventanaCompra
+				fieldCodigoBarras.setText("");
+			}
+		});
 		GridBagConstraints gbc_fieldCodigoBarras = new GridBagConstraints();
 		gbc_fieldCodigoBarras.insets = new Insets(0, 0, 5, 5);
 		gbc_fieldCodigoBarras.fill = GridBagConstraints.HORIZONTAL;
@@ -171,7 +186,7 @@ public class VentanaCompra extends JFrame {
 		fieldCodigoBarras.setColumns(10);
 		
 		JButton btnCodigoBarras = new JButton("Añadir");
-		btnCodigoBarras.addMouseListener(new MouseAdapter() {
+		btnCodigoBarras.addMouseListener(new MouseAdapter() { // Boton codigo barras
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Producto anadir = Main.anadirProductoACompraCodigoBarra(fieldCodigoBarras.getText());
@@ -246,21 +261,25 @@ public class VentanaCompra extends JFrame {
 		int filas = tableListaCompra.getRowCount();
 		boolean repetido = false;
 		
-		for(int i = 0; i < filas; i++) {
-			if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
-				int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
-				tableListaCompra.setValueAt(unidades, i, 1);
-				repetido = true;
-				break;
+		if(anadir != null) {
+			for(int i = 0; i < filas; i++) {
+				if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
+					int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
+					tableListaCompra.setValueAt(unidades, i, 1);
+					repetido = true;
+					break;
+				}
 			}
-		}
-		
-		if(anadir != null && repetido != true) {
-			String productos[] = new String [3];
-			productos[0] = anadir.getNombre();
-			productos[1] = anadir.getUnidades() + "";
-			productos[2] = anadir.getPrecioUnitario() + "";
-			modeloCompra.addRow(productos);
+			
+			if(repetido != true) {
+				String productos[] = new String [3];
+				productos[0] = anadir.getNombre();
+				productos[1] = anadir.getUnidades() + "";
+				productos[2] = anadir.getPrecioUnitario() + "";
+				modeloCompra.addRow(productos);
+			}
+		}else {
+			System.out.println("No se ha añadido ningun producto. Introduzca un producto para añadirlo.");
 		}
 		
 	}
