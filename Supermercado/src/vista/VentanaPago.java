@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class VentanaPago extends JFrame {
 
@@ -47,7 +48,7 @@ public class VentanaPago extends JFrame {
 		btnTicket.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (vueltas > 0) {
+				if (vueltas >= 0) {
 				Main.ticket();
 				}
 			}
@@ -81,6 +82,7 @@ public class VentanaPago extends JFrame {
 		contentPane.add(lblEntrega, gbc_lblEntrega);
 		
 		JSpinner entrega = new JSpinner();
+		entrega.setModel(new SpinnerNumberModel(Float.valueOf(0), Float.valueOf(0), null, Float.valueOf(1)));
 		
 		
 		GridBagConstraints gbc_entrega = new GridBagConstraints();
@@ -116,7 +118,7 @@ public class VentanaPago extends JFrame {
 		
 		entrega.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				vueltas = (int)entrega.getValue() - (float) precioFinal;
+				vueltas = (float)entrega.getValue() - (float) precioFinal;
 				vueltas = (float)Math.round(vueltas*100)/100;
 				cambio.setText(vueltas+"");
 			}

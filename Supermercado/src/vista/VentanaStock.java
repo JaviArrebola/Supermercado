@@ -22,7 +22,10 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaStock extends JFrame {
 
@@ -33,7 +36,7 @@ public class VentanaStock extends JFrame {
 	private JTextField nombre;
 	private JButton btnNewButton_2;
 	private JLabel lblNewLabel_1;
-	private JTextField codigo;
+	private JSpinner codigo;
 	private JButton btnNewButton_3;
 	private JScrollPane scrollPane;
 	private DefaultTableModel tableStock;
@@ -113,14 +116,13 @@ public class VentanaStock extends JFrame {
 		gbc_lblNewLabel_1.gridy = 1;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		codigo = new JTextField();
+		codigo = new JSpinner();
 		GridBagConstraints gbc_codigo = new GridBagConstraints();
 		gbc_codigo.insets = new Insets(0, 0, 5, 5);
 		gbc_codigo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_codigo.gridx = 5;
 		gbc_codigo.gridy = 1;
 		contentPane.add(codigo, gbc_codigo);
-		codigo.setColumns(10);
 		
 		btnNewButton_3 = new JButton("Buscar");
 		btnNewButton_3.addMouseListener(new MouseAdapter() {
@@ -149,6 +151,12 @@ public class VentanaStock extends JFrame {
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		codigoBarra = new JTextField();
+		codigoBarra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.buscarCodigoBarra(codigoBarra.getText());
+				codigoBarra.setText("");
+			}
+		});
 		GridBagConstraints gbc_codigoBarra = new GridBagConstraints();
 		gbc_codigoBarra.insets = new Insets(0, 0, 5, 5);
 		gbc_codigoBarra.fill = GridBagConstraints.HORIZONTAL;
@@ -231,9 +239,8 @@ public class VentanaStock extends JFrame {
 	}
 	
 	public void buscarID() throws SQLException {
-		String id = codigo.getText();
-		int i = Integer.parseInt(id);
-		Main.buscarID(i);
+		int id = (int) codigo.getValue();
+		Main.buscarID(id);
 	}
 
 }
