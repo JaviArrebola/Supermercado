@@ -169,14 +169,14 @@ public class VentanaRecibo extends JFrame {
 		gbc_lblNewLabel_1.gridy = 0;
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Subtotal: " + subtotal);
+		JLabel lblNewLabel_2 = new JLabel("Subtotal: " + subtotal + "€");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
 		gbc_lblNewLabel_2.gridx = 1;
 		gbc_lblNewLabel_2.gridy = 0;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Total: " + precioTotal);
+		JLabel lblNewLabel_3 = new JLabel("Total: " + precioTotal + "€");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.gridx = 2;
 		gbc_lblNewLabel_3.gridy = 0;

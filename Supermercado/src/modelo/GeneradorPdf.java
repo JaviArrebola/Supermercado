@@ -29,7 +29,7 @@ public class GeneradorPdf {
             DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             String fechaHoraFormateada = ahora.format(formatoFechaHora);
 
-            Paragraph idYFecha = new Paragraph("ID Venta: " + idVenta + "\t\tFecha y hora: " + fechaHoraFormateada, fontTexto);
+            Paragraph idYFecha = new Paragraph("Codigo Ticket: " + idVenta + "\t\tFecha y hora: " + fechaHoraFormateada, fontTexto);
             doc.add(idYFecha);
             doc.add(new Paragraph(" "));
 
