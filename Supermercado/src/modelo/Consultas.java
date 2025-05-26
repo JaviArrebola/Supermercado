@@ -79,6 +79,25 @@ public class Consultas {
 		return rs;
 	}
 	
+	public static int compraStock(int id) {
+		Connection con = ConectorDB.getConexion();
+		Statement st;
+		ResultSet rs = null;
+		int stock = 0;
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery("SELECT stock FROM productos WHERE id = " + id + ";");
+			if(rs.next()) {
+				stock = rs.getInt("stock");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return stock;
+	}
+	
 	public static void restarStock(Compra compra) {
 		Connection con = ConectorDB.getConexion();
 		try {

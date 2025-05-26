@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Iterator;
 
 import modelo.*;
@@ -253,59 +252,23 @@ public class Main {
 		}
 	}
 	
-	public static Producto anadirProductoACompra(int id) {
+	public static Producto anadirProductoACompra(int id) { // Usando id
 		ResultSet rs = Consultas.compraID(id);
-		Producto nuevo = null;
-		try {
-			if(rs.next()) {
-				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
-				compra.anadirCompra(nuevo);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(compra.toString());
-		
+		Producto nuevo = anadir(rs);
 		return nuevo;
 		
 	}
 	
-	public static Producto anadirProductoACompraCodigoBarra(String codigoBarra) {
+	public static Producto anadirProductoACompraCodigoBarra(String codigoBarra) { // Usando codigo de barras
 		ResultSet rs = Consultas.compraCodigoBarra(codigoBarra);
-		Producto nuevo = null;
-		try {
-			if(rs.next()) {
-				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
-				compra.anadirCompra(nuevo);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(compra.toString());
-		
+		Producto nuevo = anadir(rs);
 		return nuevo;
 		
 	}
 	
-	public static Producto anadirProductoACompra(String nombre) {
+	public static Producto anadirProductoACompra(String nombre) { // Usando nombre del producto
 		ResultSet rs = Consultas.compraNombre(nombre);
-		Producto nuevo = null;
-		try {
-			if(rs.next()) {
-				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
-				compra.anadirCompra(nuevo);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(compra.toString());
-		
+		Producto nuevo = anadir(rs);
 		return nuevo;
 		
 	}
@@ -318,6 +281,24 @@ public class Main {
 	public static void volverPago() {
 		ventanaPago.setVisible(false);
 		ventanaCompra.setVisible(true);
+	}
+	
+	private static Producto anadir(ResultSet rs) {
+		Producto nuevo = null;
+		try {
+			if(rs.next()) {
+				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
+				compra.anadirCompra(nuevo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(compra.toString());
+		
+		return nuevo;
+		
 	}
 	
 }
