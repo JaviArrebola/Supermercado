@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Main;
+import modelo.Consultas;
 import modelo.Producto;
 
 import java.awt.GridBagLayout;
@@ -260,25 +261,29 @@ public class VentanaCompra extends JFrame {
 	private void anadirProductoACompra(Producto anadir) {
 		int filas = tableListaCompra.getRowCount();
 		boolean repetido = false;
-		
-		if(anadir != null) {
+		int stock = Consultas.compraStock(anadir.getId());
+		if(anadir != null) { // Si hay que añadir algun producto
 			for(int i = 0; i < filas; i++) {
-				if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) {
+				if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) { // Si el nombre del producto que hay en la tabla coincide con el que se quiere añadir	
 					int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
-					tableListaCompra.setValueAt(unidades, i, 1);
 					repetido = true;
+					if(unidades <= stock) { // Si el numero de unidades no supera el stock
+						tableListaCompra.setValueAt(unidades, i, 1);
+					}
 					break;
 				}
 			}
 			
-			if(repetido != true) {
-				String productos[] = new String [3];
-				productos[0] = anadir.getNombre();
-				productos[1] = anadir.getUnidades() + "";
-				productos[2] = anadir.getPrecioUnitario() + "";
-				modeloCompra.addRow(productos);
+			if(repetido != true) { // Si el nombre del producto que se quiere añadir no esta en la tabla	
+				if(stock > 0) { // Si hay al menos una unidad del producto deseado
+					String productos[] = new String [3];
+					productos[0] = anadir.getNombre();
+					productos[1] = anadir.getUnidades() + "";
+					productos[2] = anadir.getPrecioUnitario() + "";
+					modeloCompra.addRow(productos);
+				}
 			}
-		}else {
+		}else { // Si no hay ningun producto que añadir
 			System.out.println("No se ha añadido ningun producto. Introduzca un producto para añadirlo.");
 		}
 		
