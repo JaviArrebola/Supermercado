@@ -79,7 +79,7 @@ public class Consultas {
 		return rs;
 	}
 	
-	public static int compraStock(int id) {
+	public static int compraStock(int id) { // Para obtener el stock de un producto, usado por las compras
 		Connection con = ConectorDB.getConexion();
 		Statement st;
 		ResultSet rs = null;

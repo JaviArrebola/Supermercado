@@ -288,7 +288,8 @@ public class Main {
 		try {
 			if(rs.next()) {
 				nuevo = new Producto(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio"));
-				compra.anadirCompra(nuevo);
+				int stock = Consultas.compraStock(nuevo.getId());
+				compra.anadirCompra(nuevo, stock);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
