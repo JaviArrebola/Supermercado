@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Main;
+import modelo.Consultas;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -26,6 +27,7 @@ import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class VentanaStock extends JFrame {
 
@@ -117,6 +119,7 @@ public class VentanaStock extends JFrame {
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		codigo = new JSpinner();
+		codigo.setModel(new SpinnerNumberModel(Consultas.minIDProducto(), Consultas.minIDProducto(), Consultas.maxIDProducto(), 1));
 		GridBagConstraints gbc_codigo = new GridBagConstraints();
 		gbc_codigo.insets = new Insets(0, 0, 5, 5);
 		gbc_codigo.fill = GridBagConstraints.HORIZONTAL;

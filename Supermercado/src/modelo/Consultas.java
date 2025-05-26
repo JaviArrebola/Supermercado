@@ -163,4 +163,36 @@ public class Consultas {
 		return rs;
 	}
 	
+	public static int maxIDProducto() {
+		int max = 1;
+		Connection con = ConectorDB.getConexion();
+		Statement st;
+		try {
+			st = con.createStatement();		
+			ResultSet rs = st.executeQuery("SELECT max(id_venta) AS id_venta FROM ventas;");
+			rs.next();
+			max = rs.getInt("id_venta");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return max;
+	}
+	
+	public static int minIDProducto() {
+		int min = 1;
+		Connection con = ConectorDB.getConexion();
+		Statement st;
+		try {
+			st = con.createStatement();		
+			ResultSet rs = st.executeQuery("SELECT min(id_venta) AS id_venta FROM ventas;");
+			rs.next();
+			min = rs.getInt("id_venta");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return min;
+	}
+	
 }

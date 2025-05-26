@@ -27,7 +27,7 @@ public class VentanaPago extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private float vueltas;
+	private float vueltas=-1;
 
 	public VentanaPago(float precioFinal) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
