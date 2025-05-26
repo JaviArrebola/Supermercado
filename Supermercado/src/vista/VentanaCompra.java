@@ -26,6 +26,7 @@ import javax.swing.JSpinner;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class VentanaCompra extends JFrame {
 
@@ -112,6 +113,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(lblCodigoProducto, gbc_lblCodigoProducto);
 		
 		fieldCodigoProducto = new JSpinner();
+		fieldCodigoProducto.setModel(new SpinnerNumberModel(1, Consultas.minIDProducto(), Consultas.maxIDProducto(), 1));
 		GridBagConstraints gbc_fieldCodigoProducto = new GridBagConstraints();
 		gbc_fieldCodigoProducto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_fieldCodigoProducto.insets = new Insets(0, 0, 5, 5);
