@@ -56,6 +56,7 @@ public class VentanaStock extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 300);
+		setTitle("App Supermercado -------> Ventana Stock");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -183,17 +184,23 @@ public class VentanaStock extends JFrame {
 		
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 4;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.gridwidth = GridBagConstraints.REMAINDER;
+		gbc_scrollPane.gridheight = 1;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
+		gbc_scrollPane.weightx = 1.0;
+		gbc_scrollPane.weighty = 1.0;
 		contentPane.add(scrollPane, gbc_scrollPane);
+
 		
 				
 		
 		tablaStock = new JTable(longitud, 4);
 		tablaStock.setModel(tableStock);
+		tablaStock.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
 		
 		scrollPane.setViewportView(tablaStock);
 		
