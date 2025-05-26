@@ -93,6 +93,7 @@ public class Main {
 				unidades = a.getUnidades();
 				subtotal += precio*unidades;
 			}
+			subtotal = (float)Math.round(subtotal*100)/100;
 			
 			precioTotal = subtotal + (subtotal*21/100);
 			precioTotal = (float)Math.round(precioTotal*100)/100;
