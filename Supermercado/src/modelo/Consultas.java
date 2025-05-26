@@ -169,13 +169,14 @@ public class Consultas {
 		Statement st;
 		try {
 			st = con.createStatement();		
-			ResultSet rs = st.executeQuery("SELECT max(id_venta) AS id_venta FROM ventas;");
+			ResultSet rs = st.executeQuery("SELECT max(id) AS id FROM productos;");
 			rs.next();
-			max = rs.getInt("id_venta");
+			max = rs.getInt("id");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(max);
 		return max;
 	}
 	
@@ -185,9 +186,9 @@ public class Consultas {
 		Statement st;
 		try {
 			st = con.createStatement();		
-			ResultSet rs = st.executeQuery("SELECT min(id_venta) AS id_venta FROM ventas;");
+			ResultSet rs = st.executeQuery("SELECT min(id) AS id FROM productos;");
 			rs.next();
-			min = rs.getInt("id_venta");
+			min = rs.getInt("id");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
