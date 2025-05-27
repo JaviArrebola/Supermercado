@@ -176,7 +176,6 @@ public class Consultas {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(max);
 		return max;
 	}
 	

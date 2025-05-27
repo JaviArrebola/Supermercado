@@ -296,7 +296,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		System.out.println(compra.toString());
+		System.out.println("Compra actual: " + compra.toString());
 		
 		return nuevo;
 		

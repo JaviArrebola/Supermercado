@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -154,11 +155,16 @@ public class VentanaCompra extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int fila = tableListaCompra.getSelectedRow();
-				if(fila < 0) {
+				if(fila < 0) { // Si no hay ningun producto seleccionado
+					JOptionPane.showMessageDialog(VentanaCompra.this, "No hay ningun producto seleccionado. Seleccione un producto para eliminarlo.", "Producto no seleccionado.", JOptionPane.ERROR_MESSAGE);
 					System.out.println("No hay ningun producto seleccionado. Seleccione un producto para eliminar.");
-				}else {
-					Main.eliminarProductoDeCompra(fila);
-					modeloCompra.removeRow(fila);
+				}else { // Si hay algun producto seleccionado
+					int seleccion = JOptionPane.showConfirmDialog(VentanaCompra.this, "¿Esta seguro que quieres eliminar ese producto?", "Eliminar producto seleccionado.", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+					if(seleccion == 0) { // Si se confirma la eliminacion
+						Main.eliminarProductoDeCompra(fila);
+						modeloCompra.removeRow(fila);
+					}
+
 				}
 
 			}
@@ -263,29 +269,34 @@ public class VentanaCompra extends JFrame {
 	private void anadirProductoACompra(Producto anadir) {
 		int filas = tableListaCompra.getRowCount();
 		boolean repetido = false;
-		int stock = Consultas.compraStock(anadir.getId());
 		if(anadir != null) { // Si hay que añadir algun producto
+			int stock = Consultas.compraStock(anadir.getId());
 			for(int i = 0; i < filas; i++) {
 				if(tableListaCompra.getValueAt(i, 0).equals(anadir.getNombre())) { // Si el nombre del producto que hay en la tabla coincide con el que se quiere añadir	
 					int unidades = Integer.parseInt(tableListaCompra.getValueAt(i, 1).toString()) + 1;
 					repetido = true;
 					if(unidades <= stock) { // Si el numero de unidades no supera el stock
 						tableListaCompra.setValueAt(unidades, i, 1);
+					}else { // Si el numero de unidades supera el stock
+						JOptionPane.showMessageDialog(VentanaCompra.this, "Se ha superado la cantidad de unidades de este producto, no se puede añadir mas.", "Cantidad maxima superada.", JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				}
 			}
 			
 			if(repetido != true) { // Si el nombre del producto que se quiere añadir no esta en la tabla	
-				if(stock > 0) { // Si hay al menos una unidad del producto deseado
+				if(stock > 0) { // Si hay al menos una unidad del producto deseado en el stock
 					String productos[] = new String [3];
 					productos[0] = anadir.getNombre();
 					productos[1] = anadir.getUnidades() + "";
 					productos[2] = anadir.getPrecioUnitario() + "";
 					modeloCompra.addRow(productos);
+				}else { // Si no hay ni una unidad del producto deseado en el stock
+					JOptionPane.showMessageDialog(VentanaCompra.this, "No quedan mas unidades de este producto. No se puede añadir a la compra.", "Cantidad maxima superada.", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}else { // Si no hay ningun producto que añadir
+			JOptionPane.showMessageDialog(VentanaCompra.this, "No se ha encontrado el producto seleccionado.", "Producto no encontrado.", JOptionPane.ERROR_MESSAGE);
 			System.out.println("No se ha añadido ningun producto. Introduzca un producto para añadirlo.");
 		}
 		
