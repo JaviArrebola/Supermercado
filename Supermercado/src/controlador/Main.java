@@ -68,9 +68,10 @@ public class Main {
 		ventanaCompra.setVisible(true);
 	}
 	
-	public static void finalizarCompra() {
-
+	public static boolean finalizarCompra() {
+		boolean finalizar = false; // Esto ayuda a ventanaCompra
 		if(compra.noHayCompra()) {
+			finalizar = true;
 			
 			ventanaCompra.setVisible(false);
 			if (ventanaStock!=null) {
@@ -104,6 +105,8 @@ public class Main {
 			System.out.println("No se puede finalizar una compra sin añadir productos.");
 			System.out.println("Porfavor, introduzca productos a la compra.");
 		}
+		
+		return finalizar;
 		
 	}
 	

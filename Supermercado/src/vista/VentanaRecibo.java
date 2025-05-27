@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 public class VentanaRecibo extends JFrame {
 
@@ -51,7 +52,8 @@ public class VentanaRecibo extends JFrame {
 			productos[0] = anadir.getUnidades() + "";
 			productos[1] = anadir.getNombre();
 			productos[2] = anadir.getPrecioUnitario() + "";
-			float importe = Float.parseFloat(productos[0]) * Float.parseFloat(productos[2]);
+			
+			float importe = (float)Math.round((Float.parseFloat(productos[0]) * Float.parseFloat(productos[2]))*100)/100;
 			productos[3] = importe + "";
 			modeloCompra.addRow(productos);
 		}
@@ -67,12 +69,13 @@ public class VentanaRecibo extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{30, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{22, 0, 0, 0, 0, 24, 0};
+		gbl_contentPane.rowHeights = new int[]{22, 0, 0, 0, 0, 0, 0, 24, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Supermercado");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
@@ -84,7 +87,7 @@ public class VentanaRecibo extends JFrame {
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 1;
-		gbc_panel_1.gridy = 2;
+		gbc_panel_1.gridy = 3;
 		contentPane.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -94,6 +97,7 @@ public class VentanaRecibo extends JFrame {
 		panel_1.setLayout(gbl_panel_1);
 		
 		JLabel lblCodigoTicket = new JLabel("Codigo ticket: ");
+		lblCodigoTicket.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblCodigoTicket = new GridBagConstraints();
 		gbc_lblCodigoTicket.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCodigoTicket.gridx = 0;
@@ -101,6 +105,7 @@ public class VentanaRecibo extends JFrame {
 		panel_1.add(lblCodigoTicket, gbc_lblCodigoTicket);
 		
 		JLabel cod = new JLabel(id);
+		cod.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_cod = new GridBagConstraints();
 		gbc_cod.insets = new Insets(0, 0, 0, 5);
 		gbc_cod.gridx = 1;
@@ -115,6 +120,7 @@ public class VentanaRecibo extends JFrame {
 		panel_1.add(lblCodigoTicketCompra, gbc_lblCodigoTicketCompra);
 		
 		JLabel lblFecha = new JLabel("Fecha: ");
+		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 		gbc_lblFecha.insets = new Insets(0, 0, 0, 5);
 		gbc_lblFecha.gridx = 3;
@@ -122,6 +128,7 @@ public class VentanaRecibo extends JFrame {
 		panel_1.add(lblFecha, gbc_lblFecha);
 		
 		JLabel fecha = new JLabel(LocalDate.now()+"");
+		fecha.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_fecha = new GridBagConstraints();
 		gbc_fecha.insets = new Insets(0, 0, 0, 5);
 		gbc_fecha.gridx = 4;
@@ -140,10 +147,11 @@ public class VentanaRecibo extends JFrame {
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 3;
+		gbc_scrollPane.gridy = 4;
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		tableCompra = new JTable();
+		tableCompra.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tableCompra.setEnabled(false);
 		tableCompra.setModel(modeloCompra);
 		scrollPane.setViewportView(tableCompra);
@@ -153,7 +161,7 @@ public class VentanaRecibo extends JFrame {
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 1;
-		gbc_panel.gridy = 4;
+		gbc_panel.gridy = 5;
 		contentPane.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
@@ -163,6 +171,7 @@ public class VentanaRecibo extends JFrame {
 		panel.setLayout(gbl_panel);
 		
 		JLabel lblNewLabel_1 = new JLabel("IVA: 21%");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_lblNewLabel_1.gridx = 0;
@@ -170,6 +179,7 @@ public class VentanaRecibo extends JFrame {
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Subtotal: " + subtotal + "€");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
 		gbc_lblNewLabel_2.gridx = 1;
@@ -177,6 +187,7 @@ public class VentanaRecibo extends JFrame {
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Total: " + precioTotal + "€");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.gridx = 2;
 		gbc_lblNewLabel_3.gridy = 0;
@@ -184,10 +195,10 @@ public class VentanaRecibo extends JFrame {
 		
 		JPanel panelOpciones = new JPanel();
 		GridBagConstraints gbc_panelOpciones = new GridBagConstraints();
-		gbc_panelOpciones.insets = new Insets(0, 0, 0, 5);
+		gbc_panelOpciones.insets = new Insets(0, 0, 5, 5);
 		gbc_panelOpciones.fill = GridBagConstraints.VERTICAL;
 		gbc_panelOpciones.gridx = 1;
-		gbc_panelOpciones.gridy = 5;
+		gbc_panelOpciones.gridy = 7;
 		contentPane.add(panelOpciones, gbc_panelOpciones);
 		GridBagLayout gbl_panelOpciones = new GridBagLayout();
 		gbl_panelOpciones.columnWidths = new int[]{0, 0, 0};
@@ -197,6 +208,7 @@ public class VentanaRecibo extends JFrame {
 		panelOpciones.setLayout(gbl_panelOpciones);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
 		gbc_btnVolver.insets = new Insets(0, 0, 0, 5);
 		gbc_btnVolver.gridx = 0;
@@ -204,12 +216,14 @@ public class VentanaRecibo extends JFrame {
 		panelOpciones.add(btnVolver, gbc_btnVolver);
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_btnCerrarSesion = new GridBagConstraints();
 		gbc_btnCerrarSesion.gridx = 1;
 		gbc_btnCerrarSesion.gridy = 0;
 		panelOpciones.add(btnCerrarSesion, gbc_btnCerrarSesion);
 		
 		JButton btnGuardarPdf = new JButton("Guardar Recibo (PDF)");
+		btnGuardarPdf.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_btnGuardarPdf = new GridBagConstraints();
 		gbc_btnGuardarPdf.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardarPdf.gridx = 2;

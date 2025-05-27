@@ -28,6 +28,7 @@ import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Font;
 
 public class VentanaCompra extends JFrame {
 
@@ -74,6 +75,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.setLayout(gbl_panelIntroducionManual);
 		
 		JLabel lblNombreProducto = new JLabel("Nombre del producto: ");
+		lblNombreProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblNombreProducto = new GridBagConstraints();
 		gbc_lblNombreProducto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNombreProducto.insets = new Insets(0, 0, 5, 5);
@@ -82,6 +84,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(lblNombreProducto, gbc_lblNombreProducto);
 		
 		fieldNombreProducto = new JTextField();
+		fieldNombreProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_fieldNombreProducto = new GridBagConstraints();
 		gbc_fieldNombreProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_fieldNombreProducto.fill = GridBagConstraints.HORIZONTAL;
@@ -91,6 +94,7 @@ public class VentanaCompra extends JFrame {
 		fieldNombreProducto.setColumns(10);
 		
 		JButton btnNombreProducto = new JButton("Añadir"); // ESTO ES EL BOTON NOMBRE PRODUCTO
+		btnNombreProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNombreProducto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -106,6 +110,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(btnNombreProducto, gbc_btnNombreProducto);
 		
 		JLabel lblCodigoProducto = new JLabel("Codigo del producto: ");
+		lblCodigoProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblCodigoProducto = new GridBagConstraints();
 		gbc_lblCodigoProducto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCodigoProducto.insets = new Insets(0, 0, 5, 5);
@@ -114,6 +119,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(lblCodigoProducto, gbc_lblCodigoProducto);
 		
 		fieldCodigoProducto = new JSpinner();
+		fieldCodigoProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		fieldCodigoProducto.setModel(new SpinnerNumberModel(1, Consultas.minIDProducto(), Consultas.maxIDProducto(), 1));
 		GridBagConstraints gbc_fieldCodigoProducto = new GridBagConstraints();
 		gbc_fieldCodigoProducto.fill = GridBagConstraints.HORIZONTAL;
@@ -132,10 +138,12 @@ public class VentanaCompra extends JFrame {
 		
 		
 		tableListaCompra = new JTable();
+		tableListaCompra.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		scrollPane.setViewportView(tableListaCompra);
 		tableListaCompra.setModel(modeloCompra);
 		
 		JButton btnCodigoProducto = new JButton("Añadir");
+		btnCodigoProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCodigoProducto.addMouseListener(new MouseAdapter() { // Es el [BOTON ID PRODUCTO]
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -151,6 +159,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(btnCodigoProducto, gbc_btnCodigoProducto);
 		
 		JButton btnEliminarSeleccion = new JButton("Eliminar producto seleccionado");
+		btnEliminarSeleccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEliminarSeleccion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -171,6 +180,7 @@ public class VentanaCompra extends JFrame {
 		});
 		
 		JLabel lblCodigoBarras = new JLabel("Codigo de barras: ");
+		lblCodigoBarras.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblCodigoBarras = new GridBagConstraints();
 		gbc_lblCodigoBarras.anchor = GridBagConstraints.EAST;
 		gbc_lblCodigoBarras.insets = new Insets(0, 0, 5, 5);
@@ -179,6 +189,7 @@ public class VentanaCompra extends JFrame {
 		panelIntroducionManual.add(lblCodigoBarras, gbc_lblCodigoBarras);
 		
 		fieldCodigoBarras = new JTextField();
+		fieldCodigoBarras.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		fieldCodigoBarras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Producto anadir = Main.anadirProductoACompraCodigoBarra(fieldCodigoBarras.getText());
@@ -195,6 +206,7 @@ public class VentanaCompra extends JFrame {
 		fieldCodigoBarras.setColumns(10);
 		
 		JButton btnCodigoBarras = new JButton("Añadir");
+		btnCodigoBarras.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCodigoBarras.addMouseListener(new MouseAdapter() { // Boton codigo barras
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -228,6 +240,7 @@ public class VentanaCompra extends JFrame {
 		panelOpciones.setLayout(gbl_panelOpciones);
 		
 		JButton btnFinalizarCompra = new JButton("Finalizar compra");
+		btnFinalizarCompra.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnFinalizarCompra = new GridBagConstraints();
 		gbc_btnFinalizarCompra.insets = new Insets(0, 0, 0, 5);
 		gbc_btnFinalizarCompra.gridx = 0;
@@ -235,6 +248,7 @@ public class VentanaCompra extends JFrame {
 		panelOpciones.add(btnFinalizarCompra, gbc_btnFinalizarCompra);
 		
 		JButton btnStock = new JButton("Stock");
+		btnStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnStock = new GridBagConstraints();
 		gbc_btnStock.insets = new Insets(0, 0, 0, 5);
 		gbc_btnStock.gridx = 1;
@@ -242,6 +256,7 @@ public class VentanaCompra extends JFrame {
 		panelOpciones.add(btnStock, gbc_btnStock);
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnCerrarSesion = new GridBagConstraints();
 		gbc_btnCerrarSesion.gridx = 2;
 		gbc_btnCerrarSesion.gridy = 0;
@@ -261,7 +276,10 @@ public class VentanaCompra extends JFrame {
 		btnFinalizarCompra.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Main.finalizarCompra();
+				boolean finalizar = Main.finalizarCompra();
+				if(finalizar != true) {
+					JOptionPane.showMessageDialog(VentanaCompra.this, "No hay ningun producto en la compra, introduza al menos un producto a la compra para poder finalizarla.", "Compra incompleta.", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}

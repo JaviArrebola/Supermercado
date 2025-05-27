@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class VentanaInicio extends JFrame {
 
@@ -36,11 +37,12 @@ public class VentanaInicio extends JFrame {
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 157, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("Inicio sesión");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
@@ -55,6 +57,7 @@ public class VentanaInicio extends JFrame {
 		contentPane.add(lblEstadoSesion, gbc_lblEstadoSesion);
 		
 		JLabel lblNewLabel_1 = new JLabel("Username:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
@@ -63,6 +66,7 @@ public class VentanaInicio extends JFrame {
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -72,6 +76,7 @@ public class VentanaInicio extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
@@ -80,6 +85,7 @@ public class VentanaInicio extends JFrame {
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -89,6 +95,7 @@ public class VentanaInicio extends JFrame {
 		passwordField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Iniciar sesión");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -22,6 +22,7 @@ import javax.swing.JSpinner;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Font;
 
 public class VentanaPago extends JFrame {
 
@@ -45,6 +46,7 @@ public class VentanaPago extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JButton btnTicket = new JButton("Ticket");
+		btnTicket.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnTicket.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -55,6 +57,7 @@ public class VentanaPago extends JFrame {
 		});
 		
 		JLabel lblTotal = new JLabel("Total: ");
+		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
 		gbc_lblTotal.anchor = GridBagConstraints.EAST;
 		gbc_lblTotal.insets = new Insets(0, 0, 5, 5);
@@ -63,6 +66,7 @@ public class VentanaPago extends JFrame {
 		contentPane.add(lblTotal, gbc_lblTotal);
 		
 		JLabel precio = new JLabel();
+		precio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_precio = new GridBagConstraints();
 		gbc_precio.gridwidth = 2;
 		gbc_precio.anchor = GridBagConstraints.EAST;
@@ -74,6 +78,7 @@ public class VentanaPago extends JFrame {
 		precio.setText(precioFinal+"");
 		
 		JLabel lblEntrega = new JLabel("Entrega: ");
+		lblEntrega.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblEntrega = new GridBagConstraints();
 		gbc_lblEntrega.anchor = GridBagConstraints.EAST;
 		gbc_lblEntrega.insets = new Insets(0, 0, 5, 5);
@@ -82,6 +87,7 @@ public class VentanaPago extends JFrame {
 		contentPane.add(lblEntrega, gbc_lblEntrega);
 		
 		JSpinner entrega = new JSpinner();
+		entrega.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		entrega.setModel(new SpinnerNumberModel(Float.valueOf(0), Float.valueOf(0), null, Float.valueOf(1)));
 		
 		
@@ -93,7 +99,8 @@ public class VentanaPago extends JFrame {
 		gbc_entrega.gridy = 2;
 		contentPane.add(entrega, gbc_entrega);
 		
-		JLabel lblCambio = new JLabel("Cambio");
+		JLabel lblCambio = new JLabel("Cambio:");
+		lblCambio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblCambio = new GridBagConstraints();
 		gbc_lblCambio.anchor = GridBagConstraints.EAST;
 		gbc_lblCambio.insets = new Insets(0, 0, 5, 5);
@@ -102,6 +109,7 @@ public class VentanaPago extends JFrame {
 		contentPane.add(lblCambio, gbc_lblCambio);
 		
 		JLabel cambio = new JLabel("");
+		cambio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_cambio = new GridBagConstraints();
 		gbc_cambio.gridwidth = 2;
 		gbc_cambio.anchor = GridBagConstraints.EAST;
@@ -125,6 +133,7 @@ public class VentanaPago extends JFrame {
 		});
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCerrarSesion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -133,6 +142,7 @@ public class VentanaPago extends JFrame {
 		});
 		
 		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
