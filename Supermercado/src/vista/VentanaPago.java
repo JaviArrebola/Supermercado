@@ -15,6 +15,7 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -23,6 +24,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.SpinnerNumberModel;
 import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class VentanaPago extends JFrame {
 
@@ -51,7 +54,9 @@ public class VentanaPago extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (vueltas >= 0) {
-				Main.ticket();
+					Main.ticket();
+				} else {
+					JOptionPane.showMessageDialog(VentanaPago.this, "Cantidad insuficiente", "Page por su compra", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
