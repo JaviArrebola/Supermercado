@@ -207,7 +207,7 @@ public class VentanaRecibo extends JFrame {
 		gbl_panelOpciones.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panelOpciones.setLayout(gbl_panelOpciones);
 		
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("Nueva Compra");
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
 		gbc_btnVolver.insets = new Insets(0, 0, 0, 5);
