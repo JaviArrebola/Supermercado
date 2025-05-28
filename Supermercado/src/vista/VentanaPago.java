@@ -1,13 +1,10 @@
 package vista;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controlador.Main;
-
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
@@ -31,23 +28,28 @@ public class VentanaPago extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private float vueltas=-1;
+	private float vueltas = -1;
 
+	// Constructor que recibe el precio total a pagar
 	public VentanaPago(float precioFinal) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle("App Supermercado -------> Ventana Pago");
+
+		// Inicializa el panel principal
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
+
+		// Establece el layout de la ventana
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
+
+		// Botón para generar el ticket
 		JButton btnTicket = new JButton("Ticket");
 		btnTicket.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnTicket.addMouseListener(new MouseAdapter() {
@@ -56,11 +58,13 @@ public class VentanaPago extends JFrame {
 				if (vueltas >= 0) {
 					Main.ticket();
 				} else {
-					JOptionPane.showMessageDialog(VentanaPago.this, "Cantidad insuficiente", "Page por su compra", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(VentanaPago.this, "Cantidad insuficiente", "Page por su compra",
+							JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});
-		
+
+		// Etiqueta para mostrar el texto "Total"
 		JLabel lblTotal = new JLabel("Total: ");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
@@ -69,7 +73,8 @@ public class VentanaPago extends JFrame {
 		gbc_lblTotal.gridx = 1;
 		gbc_lblTotal.gridy = 1;
 		contentPane.add(lblTotal, gbc_lblTotal);
-		
+
+		// Etiqueta que muestra el valor total recibido como parámetro
 		JLabel precio = new JLabel();
 		precio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_precio = new GridBagConstraints();
@@ -79,9 +84,9 @@ public class VentanaPago extends JFrame {
 		gbc_precio.gridx = 2;
 		gbc_precio.gridy = 1;
 		contentPane.add(precio, gbc_precio);
-		
-		precio.setText(precioFinal+"");
-		
+		precio.setText(precioFinal + "");
+
+		// Etiqueta para "Entrega"
 		JLabel lblEntrega = new JLabel("Entrega: ");
 		lblEntrega.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblEntrega = new GridBagConstraints();
@@ -90,12 +95,11 @@ public class VentanaPago extends JFrame {
 		gbc_lblEntrega.gridx = 1;
 		gbc_lblEntrega.gridy = 2;
 		contentPane.add(lblEntrega, gbc_lblEntrega);
-		
+
+		// Spinner para ingresar el monto entregado por el cliente
 		JSpinner entrega = new JSpinner();
 		entrega.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		entrega.setModel(new SpinnerNumberModel(Float.valueOf(0), Float.valueOf(0), null, Float.valueOf(1)));
-		
-		
 		GridBagConstraints gbc_entrega = new GridBagConstraints();
 		gbc_entrega.gridwidth = 2;
 		gbc_entrega.fill = GridBagConstraints.HORIZONTAL;
@@ -103,7 +107,8 @@ public class VentanaPago extends JFrame {
 		gbc_entrega.gridx = 2;
 		gbc_entrega.gridy = 2;
 		contentPane.add(entrega, gbc_entrega);
-		
+
+		// Etiqueta "Cambio"
 		JLabel lblCambio = new JLabel("Cambio:");
 		lblCambio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_lblCambio = new GridBagConstraints();
@@ -112,7 +117,8 @@ public class VentanaPago extends JFrame {
 		gbc_lblCambio.gridx = 1;
 		gbc_lblCambio.gridy = 3;
 		contentPane.add(lblCambio, gbc_lblCambio);
-		
+
+		// Etiqueta que mostrará el cambio a devolver
 		JLabel cambio = new JLabel("");
 		cambio.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		GridBagConstraints gbc_cambio = new GridBagConstraints();
@@ -128,15 +134,18 @@ public class VentanaPago extends JFrame {
 		gbc_btnTicket.gridx = 1;
 		gbc_btnTicket.gridy = 4;
 		contentPane.add(btnTicket, gbc_btnTicket);
-		
+
+		// Evento que calcula el cambio automáticamente cuando se modifica el valor
+		// entregado
 		entrega.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				vueltas = (float)entrega.getValue() - (float) precioFinal;
-				vueltas = (float)Math.round(vueltas*100)/100;
-				cambio.setText(vueltas+"");
+				vueltas = (float) entrega.getValue() - (float) precioFinal;
+				vueltas = (float) Math.round(vueltas * 100) / 100;
+				cambio.setText(vueltas + "");
 			}
 		});
-		
+
+		// Botón para cerrar sesión
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCerrarSesion.addMouseListener(new MouseAdapter() {
@@ -145,7 +154,8 @@ public class VentanaPago extends JFrame {
 				Main.sesionPago();
 			}
 		});
-		
+
+		// Botón para volver a la ventana anterior
 		JButton btnNewButton = new JButton("Volver");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -154,11 +164,15 @@ public class VentanaPago extends JFrame {
 				Main.volverPago();
 			}
 		});
+
+		// Añade botón "Volver" al panel
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 2;
 		gbc_btnNewButton.gridy = 4;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
+
+		// Añade botón "Cerrar Sesión" al panel
 		GridBagConstraints gbc_btnCerrarSesion = new GridBagConstraints();
 		gbc_btnCerrarSesion.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCerrarSesion.anchor = GridBagConstraints.WEST;
