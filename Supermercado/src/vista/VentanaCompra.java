@@ -24,6 +24,8 @@ import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
+
 import java.awt.Font;
 
 //Clase principal que define la ventana de compra
@@ -41,16 +43,20 @@ public class VentanaCompra extends JFrame {
 
 	// Constructor de la ventana
 	public VentanaCompra() {
-
+		fieldCodigoBarras = new JTextField();
+		recoverFocus();
 		// Modelo de la tabla para los productos añadidos a la compra
+		
 		modeloCompra = new DefaultTableModel();
 		modeloCompra.addColumn("Nombre");
 		modeloCompra.addColumn("Cantidad");
 		modeloCompra.addColumn("Precio unitario");
-
+		
+		
 		// Configuración inicial del JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1300, 600);
+		setBounds(0, 100, 1750, 700);
+		setMinimumSize(getSize());
 		setTitle("App Supermercado ------> Ventana Compra");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -111,6 +117,7 @@ public class VentanaCompra extends JFrame {
 				// Llama a Main para obtener el producto por nombre y añadirlo a la tabla
 				Producto anadir = Main.anadirProductoACompra(fieldNombreProducto.getText());
 				anadirProductoACompra(anadir); // De ventanaCompra
+				recoverFocus();
 			}
 		});
 		GridBagConstraints gbc_btnNombreProducto = new GridBagConstraints();
@@ -131,8 +138,7 @@ public class VentanaCompra extends JFrame {
 
 		fieldCodigoProducto = new JSpinner();
 		fieldCodigoProducto.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		fieldCodigoProducto
-				.setModel(new SpinnerNumberModel(1, Consultas.minIDProducto(), Consultas.maxIDProducto(), 1));
+		fieldCodigoProducto.setModel(new SpinnerNumberModel(1, Consultas.minIDProducto(), Consultas.maxIDProducto(), 1));
 		GridBagConstraints gbc_fieldCodigoProducto = new GridBagConstraints();
 		gbc_fieldCodigoProducto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_fieldCodigoProducto.insets = new Insets(0, 0, 5, 5);
@@ -162,6 +168,7 @@ public class VentanaCompra extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Producto anadir = Main.anadirProductoACompra((int) fieldCodigoProducto.getValue());
 				anadirProductoACompra(anadir); // De ventanaCompra
+				recoverFocus();
 			}
 		});
 
@@ -207,7 +214,6 @@ public class VentanaCompra extends JFrame {
 		gbc_lblCodigoBarras.gridy = 0;
 		panelIntroducionManual.add(lblCodigoBarras, gbc_lblCodigoBarras);
 
-		fieldCodigoBarras = new JTextField();
 		fieldCodigoBarras.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		fieldCodigoBarras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -223,6 +229,7 @@ public class VentanaCompra extends JFrame {
 		gbc_fieldCodigoBarras.gridy = 0;
 		panelIntroducionManual.add(fieldCodigoBarras, gbc_fieldCodigoBarras);
 		fieldCodigoBarras.setColumns(10);
+
 
 		// Botón para añadir producto por código de barras
 		JButton btnCodigoBarras = new JButton("Añadir");
@@ -360,6 +367,12 @@ public class VentanaCompra extends JFrame {
 			System.out.println("No se ha añadido ningun producto. Introduzca un producto para añadirlo.");
 		}
 
+	}
+	
+	public void recoverFocus() {
+		SwingUtilities.invokeLater(() -> {
+			fieldCodigoBarras.requestFocus();
+		});
 	}
 
 }
